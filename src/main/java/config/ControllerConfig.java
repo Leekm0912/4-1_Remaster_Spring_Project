@@ -9,9 +9,9 @@ import controller.HomeController;
 
 @Configuration
 public class ControllerConfig {
-	@Bean
-	public HomeController homeController() {
-		HomeController c = new HomeController();
-		return c;
-	}
+//	@Bean
+//	public HomeController homeController() {
+//		HomeController c = new HomeController();
+//		return c;
+//	}
 }
