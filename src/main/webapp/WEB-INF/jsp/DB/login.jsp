@@ -103,8 +103,26 @@
 
 							console.log(userName);
 							console.log(userID);
-							location.href = "loginAction.jsp?type=kakao" + type
-									+ "&id=" + userName + "&pw=" + userID;
+							// POST 방식으로 응답 전송
+							var form = document.createElement('form');
+							form.setAttribute("method", "post");
+							document.charset = "utf-8";
+							var params = {
+									"userType":"kakao"+type,
+									"id":userName,
+									"pw":userID
+							};
+							for(var key in params){
+								var hiddenField = document.createElement('input');
+								hiddenField.setAttribute('type', 'hidden');
+								hiddenField.setAttribute("name", key);
+								hiddenField.setAttribute("value", params[key]);
+								form.appendChild(hiddenField);
+							}
+							document.body.appendChild(form);
+							form.submit();
+							// GET 방식으로 전송
+							//location.href = "login.do?type=kakao" + type + "&id=" + userName + "&pw=" + userID;
 						},
 						fail : function(error) {
 							alert(JSON.stringify(error));

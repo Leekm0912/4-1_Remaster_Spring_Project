@@ -28,7 +28,9 @@ public class LoginController {
 	@PostMapping
 	public String loginStart(HttpSession sess, UserVO vo, Errors error, Model model) {
 		System.out.println("로그인 시작");
-		System.out.println(vo.getId());
+		System.out.println("파라미터 id : " + vo.getId());
+		System.out.println("파라미터 Pw : " + vo.getPw());
+		System.out.println("파라미터 userType : " + vo.getUserType());
 		UserVO userInfo = null;
 		try {
 			userInfo = loginService.login(vo);
@@ -42,7 +44,12 @@ public class LoginController {
 		}
 //		System.out.println("컨트롤러 확인 " + userInfo);
 		sess.setAttribute("userInfo", userInfo);
-		sess.setAttribute("userType", userInfo.getUserType());
+		String temp = userInfo.getUserType();
+		if(temp.equals("kakao매수자") || temp.equals("매수자")) {
+			sess.setAttribute("userType", "매수자");
+		}else if(temp.equals("kakao매도자") || temp.equals("매도자")){
+			sess.setAttribute("userType", "매도자");
+		}
 		model.addAttribute("userName", userInfo.getName());
 		return "redirect:main";
 	}

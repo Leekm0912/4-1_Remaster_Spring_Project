@@ -24,15 +24,10 @@
 	&nbsp&nbsp&nbsp&nbsp
 	<c:if test='<%=session.getAttribute("userType") != null%>'>
 		<c:choose>
-			<c:when test="${userType eq '매수자'}">
+			<c:when test="${userType eq '매수자' || userType eq '매도자'}">
 				<a href="logout.do" style="color: white;">로그아웃</a>
 			&nbsp&nbsp&nbsp&nbsp
-			<a href="mypage.jsp" style="color: white;">내정보</a>
-			</c:when>
-			<c:when test='<%=session.getAttribute("userType").toString() == "매도자"%>'>
-				<a href="logout.jsp" style="color: white;">로그아웃</a>
-			&nbsp&nbsp&nbsp&nbsp
-			<a href="mypage.jsp" style="color: white;">내정보</a>
+			<a href="mypage.do" style="color: white;">내정보</a>
 			</c:when>
 			<c:otherwise>
 				<a href="login.do" style="color: white;">로그인</a>
@@ -41,7 +36,7 @@
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-	<c:if test='<%=session.getAttribute("userType") == null%>'>
+	<c:if test="${empty userType}">
 		<a href="login.do" style="color: white;">로그인</a>
 	&nbsp&nbsp&nbsp&nbsp
 	<a href="join.do" style="color: white;">회원가입</a>

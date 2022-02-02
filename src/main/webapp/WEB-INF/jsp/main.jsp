@@ -23,11 +23,6 @@
 			<jsp:include page="./DB/layout/top.jsp" flush="false" />
 		</div>
 	</nav>
-	<%
-		System.out.println(session);
-		System.out.println("userType : " + session.getAttribute("userType"));
-		System.out.println("userInfo : " + session.getAttribute("userInfo"));
-	%>
 
 	<!-- Page Content -->
 	<div class="container">
@@ -43,15 +38,15 @@
 						</div>
 					</div>
 				</c:when>
-				<c:when test='<%=session.getAttribute("userType").toString() == "매도자"%>'>
+				<c:when test="${userType eq '매도자'}">
 
 					<div class="row">
 						<div class="col-lg-12 text-center">
 							<h1 class="mt-5">
-								${userName} 매도자님 환영합니다!
+								${userInfo.name} 매도자님 환영합니다!
 							</h1>
 
-							<p>DB 최종 프로젝트 연암부동산 입니다!</p>
+							<p>2학년때 만들었던 JSP 프로젝트를 Spring을 이용해 재구성한 프로젝트 연암부동산 입니다!</p>
 						</div>
 					</div>
 				</c:when>
@@ -68,14 +63,12 @@
 			</c:choose>
 		</c:if>
 	</div>
-	<c:if test='<%=session.getAttribute("userType") == null%>'>
+	<c:if test="${empty userType}">
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h1 class="mt-5">연암공과대학교 스마트SW 학과 2B 이경민</h1>
 				<p class="lead">학번 : 21660072</p>
 				<p>2학년때 만들었던 JSP 프로젝트를 Spring을 이용해 재구성한 프로젝트 연암부동산 입니다!</p>
-				아니 왜 널이야아아
-				${ userName }
 			</div>
 		</div>
 	</c:if>
