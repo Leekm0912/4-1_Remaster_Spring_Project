@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -34,8 +35,10 @@ public class LoginController {
 		UserVO userInfo = null;
 		try {
 			userInfo = loginService.login(vo);
-		}catch(LoginException e) {
-			e.printStackTrace();
+		}
+		catch(LoginException e) {
+//			e.printStackTrace();
+			System.err.println("service error : " + e.getClass().getName());
 			return "redirect:login.do";
 		}
 		catch (Exception e) {

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -56,7 +57,7 @@ public class SpringDAO implements DAOInterface{
 	}
 	
 	@Override
-	public UserVO selectBuyer(String id) throws Exception {
+	public UserVO selectBuyer(String id) throws DataAccessException {
 		System.out.println("===> Spring으로 selectBuyer() 기능 처리");
 		Object[] args = {id};
 		UserVO temp = jdbcTemplate.queryForObject(SelectBuyer, args, 
