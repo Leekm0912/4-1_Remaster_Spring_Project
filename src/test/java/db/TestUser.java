@@ -39,7 +39,8 @@ public class TestUser {
 	@Test
 	public void testSelectBuyer() throws Exception{
 		String id = "admin";
-		UserVO vo = dao.selectBuyer(id);
+		String userType = "buyer";
+		UserVO vo = dao.selectUser(id, userType);
 		assertNotNull(vo);
 		assertEquals(id, vo.getId());
 	}
