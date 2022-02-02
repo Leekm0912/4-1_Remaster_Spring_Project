@@ -1,16 +1,21 @@
 package config;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import db.SpringDAO;
+
 @Configuration
 @EnableTransactionManagement
-public class MemberConfig {
-
+public class DBConfig {
+	@Autowired
+	DataSource ds;
+	
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
 		DataSource ds = new DataSource();
@@ -31,5 +36,10 @@ public class MemberConfig {
 		DataSourceTransactionManager tm = new DataSourceTransactionManager();
 		tm.setDataSource(dataSource());
 		return tm;
+	}
+	
+	@Bean
+	public SpringDAO springDAO() {
+		return new SpringDAO(ds);
 	}
 }

@@ -1,3 +1,4 @@
+# using mysql
 drop table if exists 매매;
 drop table if exists 전세;
 drop table if exists 월세;
