@@ -10,11 +10,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import db.db_interface.DAOInterface;
+import db.vo.ItemVO;
 import db.vo.UserVO;
 
 
 //@Repository("daoSpring")
-public class SpringDAO {
+public class SpringDAO implements DAOInterface{
 	private JdbcTemplate jdbcTemplate;
 	
 	// SQL 명령어들
@@ -54,6 +55,7 @@ public class SpringDAO {
 //		spring.update(SAMPLE_DELETE, vo.getId());
 	}
 	
+	@Override
 	public UserVO selectBuyer(String id) throws Exception {
 		System.out.println("===> Spring으로 selectBuyer() 기능 처리");
 		Object[] args = {id};
@@ -62,10 +64,16 @@ public class SpringDAO {
 		System.out.println("★★★★★★★★★★★★★넘어온 값 " + temp);
 		return temp;
 	}
-	
-	public List<Object> selectAll() throws Exception {
-//		System.out.println("===> Spring으로 selectSampleList() 기능 처리");
-//		return spring.query(SAMPLE_LIST, new SampleRowMapper());
-		return null;
+
+	@Override
+	public void addOrder(ItemVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteOrder(int vo) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

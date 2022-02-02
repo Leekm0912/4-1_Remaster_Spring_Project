@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import db.SpringDAO;
+import db.db_interface.DAOInterface;
 import db.vo.UserVO;
 
 @Component
 public class LoginService {
 	@Autowired
-	private SpringDAO dao;
+	private DAOInterface dao;
 	
 	public UserVO login(UserVO vo) throws Exception {
 		UserVO result = dao.selectBuyer(vo.getId());
