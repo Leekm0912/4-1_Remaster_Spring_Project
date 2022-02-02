@@ -5,5 +5,5 @@ import org.springframework.dao.DataAccessException;
 import db.vo.UserVO;
 
 public interface UserInterface {
-	public UserVO selectBuyer(String id) throws DataAccessException;
+	public UserVO selectUser(String id, String userType) throws DataAccessException;
 }

@@ -16,7 +16,7 @@ public class LoginService {
 	public UserVO login(UserVO vo) {
 		UserVO result = null;
 		try {
-			result = dao.selectBuyer(vo.getId());
+			result = dao.selectUser(vo.getId(), vo.getUserType());
 		}catch(DataAccessException e) {
 //			e.printStackTrace();
 			System.err.println("DataAccessException");

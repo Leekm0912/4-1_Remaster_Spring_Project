@@ -33,26 +33,25 @@ public class LoginController {
 		System.out.println("파라미터 Pw : " + vo.getPw());
 		System.out.println("파라미터 userType : " + vo.getUserType());
 		UserVO userInfo = null;
+		String temp = vo.getUserType();
+		if(temp.equals("kakao매수자") || temp.equals("매수자")) {
+			sess.setAttribute("userType", "매수자");
+			vo.setUserType("buyer");
+		}else if(temp.equals("kakao매도자") || temp.equals("매도자")){
+			sess.setAttribute("userType", "매도자");
+			vo.setUserType("seller");
+		}
 		try {
 			userInfo = loginService.login(vo);
 		}
 		catch(LoginException e) {
 //			e.printStackTrace();
 			System.err.println("service error : " + e.getClass().getName());
-			return "redirect:login.do";
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+			sess.removeAttribute("userType");
 			return "redirect:login.do";
 		}
 //		System.out.println("컨트롤러 확인 " + userInfo);
 		sess.setAttribute("userInfo", userInfo);
-		String temp = userInfo.getUserType();
-		if(temp.equals("kakao매수자") || temp.equals("매수자")) {
-			sess.setAttribute("userType", "매수자");
-		}else if(temp.equals("kakao매도자") || temp.equals("매도자")){
-			sess.setAttribute("userType", "매도자");
-		}
 		model.addAttribute("userName", userInfo.getName());
 		return "redirect:main";
 	}

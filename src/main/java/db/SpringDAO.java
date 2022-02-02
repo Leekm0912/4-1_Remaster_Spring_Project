@@ -57,11 +57,18 @@ public class SpringDAO implements DAOInterface{
 	}
 	
 	@Override
-	public UserVO selectBuyer(String id) throws DataAccessException {
+	public UserVO selectUser(String id, String userType) throws DataAccessException {
 		System.out.println("===> Spring으로 selectBuyer() 기능 처리");
 		Object[] args = {id};
-		UserVO temp = jdbcTemplate.queryForObject(SelectBuyer, args, 
+		
+		UserVO temp = null;
+		if(userType.equals("buyer")) {
+			temp = jdbcTemplate.queryForObject(SelectBuyer, args, 
 				new UserRowMapper());
+		}else if(userType.equals("seller")) {
+			temp = jdbcTemplate.queryForObject(SelectSeller, args, 
+					new UserRowMapper());
+		}
 		System.out.println("★★★★★★★★★★★★★넘어온 값 " + temp);
 		return temp;
 	}
