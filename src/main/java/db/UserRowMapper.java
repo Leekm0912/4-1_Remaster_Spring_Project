@@ -16,8 +16,8 @@ public class UserRowMapper implements RowMapper<UserVO>
 //		System.out.println("가져온 ResultSet 테스트 Title :"+rs.getString("TITLE"));
 		sample.setId(rs.getString("ID"));
 		sample.setPw(rs.getString("PW"));
-		sample.set이름(rs.getString("이름"));
-		sample.set전화번호(rs.getString("전화번호"));
+		sample.setName(rs.getString("name"));
+		sample.setPhoneNumber(rs.getString("phoneNumber"));
 //		System.err.println("만든 sample 확인" + sample);
 		return sample;
 	}

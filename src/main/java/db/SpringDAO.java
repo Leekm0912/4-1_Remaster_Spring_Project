@@ -26,8 +26,8 @@ public class SpringDAO {
 	private final String SAMPLE_LIST_TITLE = "SELECT ID, TITLE, REG_USER, CONTENT, REG_DATE FROM SAMPLE WHERE TITLE LIKE '%'||?||'%' ORDER BY REG_DATE DESC";
 	private final String SAMPLE_LIST_CONTENT = "SELECT ID, TITLE, REG_USER, CONTENT, REG_DATE FROM SAMPLE WHERE CONTENT LIKE '%'||?||'%' ORDER BY REG_DATE DESC";
 
-	private final String SelectBuyer = "select * from 매도자 where id=?";
-	private final String SelectSeller = "select * from 매도자 where id=?";
+	private final String SelectBuyer = "select * from buyer where id=?";
+	private final String SelectSeller = "select * from seller where id=?";
 	
 	@Autowired
 	public SpringDAO(DataSource dataSource) {
@@ -59,7 +59,7 @@ public class SpringDAO {
 		Object[] args = {id};
 		UserVO temp = jdbcTemplate.queryForObject(SelectBuyer, args, 
 				new UserRowMapper());
-		System.out.println("★★★★★★★★★★★★★넘어온 값" + temp);
+		System.out.println("★★★★★★★★★★★★★넘어온 값 " + temp);
 		return temp;
 	}
 	

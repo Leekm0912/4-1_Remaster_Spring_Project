@@ -3,40 +3,40 @@ package db.vo;
 import java.sql.Date;
 
 public class ItemVO {
-	private int 등록번호;
-	private String 주소;
-	private String 매도자ID;
-	private Date 등록일자;
+	private int itemNumber;
+	private String address;
+	private String sellerID;
+	private Date itemAddDate;
 
-	public int get등록번호() {
-		return 등록번호;
+	public int getItemNumber() {
+		return itemNumber;
 	}
 
-	public void set등록번호(int 등록번호) {
-		this.등록번호 = 등록번호;
+	public void setItemNumber(int itemNumber) {
+		this.itemNumber = itemNumber;
 	}
 
-	public String get주소() {
-		return 주소;
+	public String getAddress() {
+		return address;
 	}
 
-	public void set주소(String 주소) {
-		this.주소 = 주소;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String get매도자ID() {
-		return 매도자ID;
+	public String getSellerID() {
+		return sellerID;
 	}
 
-	public void set매도자ID(String 매도자id) {
-		매도자ID = 매도자id;
+	public void setSellerID(String sellerID) {
+		this.sellerID = sellerID;
 	}
 
-	public Date get등록일자() {
-		return 등록일자;
+	public Date getItemAddDate() {
+		return itemAddDate;
 	}
 
-	public void set등록일자(Date 등록일자) {
-		this.등록일자 = 등록일자;
+	public void setItemAddDate(Date itemAddDate) {
+		this.itemAddDate = itemAddDate;
 	}
 }

@@ -19,13 +19,13 @@
 </head>
 <body>
 	<h1>
-		<a href="main.jsp" style="color: white;">연암부동산</a>
+		<a href="main" style="color: white;">연암부동산</a>
 	</h1>
 	&nbsp&nbsp&nbsp&nbsp
 	<c:if test='<%=session.getAttribute("userType") != null%>'>
 		<c:choose>
-			<c:when test='<%=session.getAttribute("userType").toString() == "매수자"%>'>
-				<a href="logout.jsp" style="color: white;">로그아웃</a>
+			<c:when test="${userType eq '매수자'}">
+				<a href="logout.do" style="color: white;">로그아웃</a>
 			&nbsp&nbsp&nbsp&nbsp
 			<a href="mypage.jsp" style="color: white;">내정보</a>
 			</c:when>
@@ -35,16 +35,16 @@
 			<a href="mypage.jsp" style="color: white;">내정보</a>
 			</c:when>
 			<c:otherwise>
-				<a href="login.jsp" style="color: white;">로그인</a>
+				<a href="login.do" style="color: white;">로그인</a>
 			&nbsp&nbsp&nbsp&nbsp
-			<a href="join.jsp" style="color: white;">회원가입</a>
+			<a href="join.do" style="color: white;">회원가입</a>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
 	<c:if test='<%=session.getAttribute("userType") == null%>'>
-		<a href="login.jsp" style="color: white;">로그인</a>
+		<a href="login.do" style="color: white;">로그인</a>
 	&nbsp&nbsp&nbsp&nbsp
-	<a href="join.jsp" style="color: white;">회원가입</a>
+	<a href="join.do" style="color: white;">회원가입</a>
 	</c:if>
 	&nbsp&nbsp&nbsp&nbsp
 	

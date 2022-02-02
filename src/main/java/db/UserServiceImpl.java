@@ -14,17 +14,17 @@ import db.db_interface.DAOInterface;
 import db.db_interface.OrderInterface;
 import db.db_interface.UserInterface;
 import db.vo.UserVO;
-import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
-import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 
 //@Service
-public class UserServiceImpl extends EgovAbstractServiceImpl implements UserInterface {
+public class UserServiceImpl 
+//extends EgovAbstractServiceImpl implements UserInterface 
+{
 	@Autowired 
 	//@Qualifier("mybatis")
 	private DAOInterface sampleDAO;
 	private String version;
 	@Autowired
-	private EgovIdGnrService egovIdGnrService;
+//	private EgovIdGnrService egovIdGnrService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -69,34 +69,4 @@ public class UserServiceImpl extends EgovAbstractServiceImpl implements UserInte
 //	public List<SampleVO> selectSampleList(SampleVO vo) throws Exception {
 //		return sampleDAO.selectAll(vo);
 //	}
-
-	@Override
-	public void insertUser(UserVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateUser(UserVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteUser(String userID) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public UserVO selectUser(String userID) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<UserVO> selectUserList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

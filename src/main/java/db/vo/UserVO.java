@@ -3,8 +3,9 @@ package db.vo;
 public class UserVO {
 	private String id;
 	private String pw;
-	private String 이름;
-	private String 전화번호;
+	private String name;
+	private String phoneNumber;
+	private String userType;
 
 	public String getId() {
 		return id;
@@ -22,19 +23,33 @@ public class UserVO {
 		this.pw = pw;
 	}
 
-	public String get이름() {
-		return 이름;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void set이름(String 이름) {
-		this.이름 = 이름;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
-	public String get전화번호() {
-		return 전화번호;
+	public String getName() {
+		return name;
 	}
 
-	public void set전화번호(String 전화번호) {
-		this.전화번호 = 전화번호;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "이름 : " + this.name + " id : " + this.id + " 타입 : " + this.userType;
+	}
+
 }
