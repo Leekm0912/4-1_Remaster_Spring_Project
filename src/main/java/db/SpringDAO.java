@@ -28,8 +28,11 @@ public class SpringDAO implements DAOInterface{
 	private final String SAMPLE_LIST_TITLE = "SELECT ID, TITLE, REG_USER, CONTENT, REG_DATE FROM SAMPLE WHERE TITLE LIKE '%'||?||'%' ORDER BY REG_DATE DESC";
 	private final String SAMPLE_LIST_CONTENT = "SELECT ID, TITLE, REG_USER, CONTENT, REG_DATE FROM SAMPLE WHERE CONTENT LIKE '%'||?||'%' ORDER BY REG_DATE DESC";
 
-	private final String SelectBuyer = "select * from buyer where id=?";
-	private final String SelectSeller = "select * from seller where id=?";
+	private final String SELECTBUYER = "select * from buyer where id=?";
+	private final String SELECTSELLER = "select * from seller where id=?";
+	private final String INSERTBUYER = "insert into buyer values(?, ?, ?, ?)";
+	private final String INSERTSELLER = "insert into seller values(?, ?, ?, ?)";
+	
 	
 	@Autowired
 	public SpringDAO(DataSource dataSource) {
@@ -63,14 +66,25 @@ public class SpringDAO implements DAOInterface{
 		
 		UserVO temp = null;
 		if(userType.equals("buyer")) {
-			temp = jdbcTemplate.queryForObject(SelectBuyer, args, 
+			temp = jdbcTemplate.queryForObject(SELECTBUYER, args, 
 				new UserRowMapper());
 		}else if(userType.equals("seller")) {
-			temp = jdbcTemplate.queryForObject(SelectSeller, args, 
+			temp = jdbcTemplate.queryForObject(SELECTSELLER, args, 
 					new UserRowMapper());
 		}
 		System.out.println("★★★★★★★★★★★★★넘어온 값 " + temp);
 		return temp;
+	}
+	
+	@Override
+	public int insertUser(UserVO vo){
+		Object[] args = {vo.getId(), vo.getPw(), vo.getName(), vo.getPhoneNumber()};
+		if(vo.getUserType().equals("buyer")) {
+			return jdbcTemplate.update(INSERTBUYER, args);
+		}else if(vo.getUserType().equals("seller")) {
+			return jdbcTemplate.update(INSERTSELLER, args);
+		}
+		return -1;
 	}
 
 	@Override

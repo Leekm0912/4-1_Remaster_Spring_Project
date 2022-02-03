@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import controller.HomeController;
 import controller.join.JoinController;
+import controller.join.JoinService;
 import controller.login.LoginController;
 import controller.login.LoginService;
 import controller.logout.LogOutController;
@@ -36,5 +37,10 @@ public class ControllerConfig {
 	@Bean
 	public JoinController joinController() {
 		return new JoinController();
+	}
+	
+	@Bean
+	public JoinService joinService() {
+		return new JoinService();
 	}
 }

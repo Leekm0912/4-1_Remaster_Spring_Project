@@ -16,74 +16,74 @@ drop view if exists detailItem_charter;
 drop view if exists detailItem_land;
 
 create table buyer(
-	ID VARCHAR(50) PRIMARY KEY,
-	PW VARCHAR(50),
-	name VARCHAR(50),
-	phoneNumber VARCHAR(20)
+	ID VARCHAR(50) PRIMARY KEY not null,
+	PW VARCHAR(50) not null,
+	name VARCHAR(50) not null,
+	phoneNumber VARCHAR(20) not null
 );
 insert into buyer values("admin", '1212', '관리자(매수)', '안알랴줌');
 
 create table seller(
-	ID VARCHAR(50) PRIMARY KEY,
-	PW VARCHAR(50),
-	name VARCHAR(50),
-	phoneNumber VARCHAR(20)
+	ID VARCHAR(50) PRIMARY KEY not null,
+	PW VARCHAR(50) not null,
+	name VARCHAR(50) not null,
+	phoneNumber VARCHAR(20) not null
 );
 insert into seller values("admin", '1212', '관리자(매도)', '안알랴줌');
 
 create table item(
-	itemNumber int PRIMARY KEY,
-	address VARCHAR(100),
-	sellerID VARCHAR(50) ,
-    itemAddDate DATETIME default CURRENT_TIMESTAMP,
+	itemNumber int PRIMARY KEY not null,
+	address VARCHAR(100) not null,
+	sellerID VARCHAR(50) not null,
+    itemAddDate DATETIME default CURRENT_TIMESTAMP not null,
     foreign key (sellerID) references seller(ID) ON DELETE CASCADE
 );
 
 
 create table orderList(
-	orderNumber int PRIMARY KEY,
-	itemNumber int,
-	sellerID VARCHAR(50) ,
-   	buyerID VARCHAR(50) ,
-    주문일자 DATETIME default CURRENT_TIMESTAMP,
+	orderNumber int PRIMARY KEY not null,
+	itemNumber int not null,
+	sellerID VARCHAR(50) not null,
+   	buyerID VARCHAR(50) not null,
+    주문일자 DATETIME default CURRENT_TIMESTAMP not null,
     foreign key (sellerID) references seller(ID) ON DELETE CASCADE,
     foreign key (buyerID) references buyer(ID) ON DELETE CASCADE,
     foreign key (itemNumber) references item(itemNumber) ON DELETE CASCADE
 );
 
 create table trading(
-	itemNumber int PRIMARY KEY,
-	sellerID VARCHAR(50) ,
-    price int,
+	itemNumber int PRIMARY KEY not null,
+	sellerID VARCHAR(50) not null,
+    price int not null,
     foreign key (itemNumber) references item(itemNumber) ON DELETE CASCADE,
     foreign key (sellerID) references seller(ID) ON DELETE CASCADE
     
 );
 
 create table monthlyRent(
-	itemNumber int PRIMARY KEY,
-	sellerID VARCHAR(50) ,
-    contractMonth int,
-    deposit int,
-    monthlyRentPrice int,
+	itemNumber int PRIMARY KEY not null,
+	sellerID VARCHAR(50) not null,
+    contractMonth int not null,
+    deposit int not null,
+    monthlyRentPrice int not null,
     foreign key (itemNumber) references item(itemNumber) ON DELETE CASCADE,
     foreign key (sellerID) references seller(ID) ON DELETE CASCADE
 );
 
 create table charter(
-	itemNumber int PRIMARY KEY,
-	sellerID VARCHAR(50) ,
-    contractMonth int,
-    price int,
+	itemNumber int PRIMARY KEY not null,
+	sellerID VARCHAR(50) not null,
+    contractMonth int not null,
+    price int not null,
     foreign key (itemNumber) references item(itemNumber) ON DELETE CASCADE,
     foreign key (sellerID) references seller(ID) ON DELETE CASCADE
 );
 
 create table land(
-	itemNumber int PRIMARY KEY,
-	sellerID VARCHAR(50) ,
-    SQM int,
-    pricePerSQM int,
+	itemNumber int PRIMARY KEY not null,
+	sellerID VARCHAR(50) not null,
+    SQM int not null,
+    pricePerSQM int not null,
     foreign key (itemNumber) references item(itemNumber) ON DELETE CASCADE,
     foreign key (sellerID) references seller(ID) ON DELETE CASCADE
 );

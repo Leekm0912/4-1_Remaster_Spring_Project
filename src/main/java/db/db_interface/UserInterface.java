@@ -6,4 +6,6 @@ import db.vo.UserVO;
 
 public interface UserInterface {
 	public UserVO selectUser(String id, String userType) throws DataAccessException;
+
+	public int insertUser(UserVO vo);
 }
