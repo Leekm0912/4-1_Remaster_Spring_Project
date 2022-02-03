@@ -20,9 +20,9 @@ public class DBConfig {
 	public DataSource dataSource() {
 		DataSource ds = new DataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&characterEncoding=utf8");
-		ds.setUsername("mybatis_test");
-		ds.setPassword("1234");
+		ds.setUrl("jdbc:mysql://localhost:3306/projectdb?serverTimezone=UTC&characterEncoding=utf8");
+		ds.setUsername("leekm");
+//		ds.setPassword("leekm0912");
 		ds.setInitialSize(2);
 		ds.setMaxActive(10);
 		ds.setTestWhileIdle(true);
