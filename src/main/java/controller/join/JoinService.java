@@ -1,10 +1,12 @@
 package controller.join;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import db.db_interface.DAOInterface;
 import db.vo.UserVO;
 
+@Service
 public class JoinService {
 	@Autowired
 	private DAOInterface dao;

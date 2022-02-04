@@ -3,12 +3,13 @@ package controller.login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import db.SpringDAO;
 import db.db_interface.DAOInterface;
 import db.vo.UserVO;
 
-@Component
+@Service
 public class LoginService {
 	@Autowired
 	private DAOInterface dao;
@@ -23,7 +24,7 @@ public class LoginService {
 			throw new LoginException();
 		}
 		if(!result.getPw().equals(vo.getPw())) {
-			throw new PwNotMatch();
+			throw new PwNotMatchException();
 		}
 		result.setPw(null); // 비밀번호 검증 후 지움.
 		result.setUserType(vo.getUserType());
