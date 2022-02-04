@@ -33,6 +33,7 @@ public class DBConfig {
 		private String id;
 		@Value("${db.home.pw}")
 		private String pw;
+		
 		@Bean(destroyMethod = "close")
 		public DataSource dataSource() {
 			DataSource ds = new DataSource();

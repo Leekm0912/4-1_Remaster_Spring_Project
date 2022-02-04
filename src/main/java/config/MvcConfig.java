@@ -35,7 +35,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource ms = 
 				new ResourceBundleMessageSource();
-		ms.setBasenames("message.label");
+		ms.setBasenames("message.common.message-common", "message.error.message-error");
 		ms.setDefaultEncoding("UTF-8");
 		return ms;
 	}
