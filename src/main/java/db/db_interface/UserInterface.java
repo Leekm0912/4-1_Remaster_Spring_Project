@@ -2,6 +2,7 @@ package db.db_interface;
 
 import org.springframework.dao.DataAccessException;
 
+import db.vo.LoginCommand;
 import db.vo.UserVO;
 
 public interface UserInterface {

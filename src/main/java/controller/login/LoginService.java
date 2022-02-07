@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import db.SpringDAO;
 import db.db_interface.DAOInterface;
+import db.vo.LoginCommand;
 import db.vo.UserVO;
 
 @Service
@@ -14,7 +15,7 @@ public class LoginService {
 	@Autowired
 	private DAOInterface dao;
 	
-	public UserVO login(UserVO vo) {
+	public UserVO login(LoginCommand vo) {
 		UserVO result = null;
 		try {
 			result = dao.selectUser(vo.getId(), vo.getUserType());
