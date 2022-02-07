@@ -78,7 +78,6 @@ public class SpringDAO implements DAOInterface{
 	}
 	
 	@Override
-	@Transactional
 	public int insertUser(UserVO vo){
 		Object[] args = {vo.getId(), vo.getPw(), vo.getName(), vo.getPhoneNumber()};
 		if(vo.getUserType().equals("buyer")) {

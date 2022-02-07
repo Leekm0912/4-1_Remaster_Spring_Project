@@ -1,9 +1,15 @@
 package db.vo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class UserVO {
+	@NotBlank
 	private String id;
+	@NotBlank
 	private String pw;
+	@NotBlank
 	private String name;
+	@NotBlank
 	private String phoneNumber;
 	private String userType;
 

@@ -2,6 +2,7 @@ package controller.join;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -22,13 +23,24 @@ public class JoinController {
 	private JoinService joinService;
 	
 	@GetMapping
-	public String viewJoinPage() {
+	public String viewJoinPage(Model model) {
 		System.out.println("회원가입 화면 출력");
+		// <form:form> 사용 위해서 커맨드 객체를 모델에 넣어줌.
+		UserVO vo = new UserVO();
+//		vo.setId("null");
+//		vo.setName("null");
+//		vo.setPw("null");
+//		vo.setPhoneNumber("null");
+		model.addAttribute("userVO", vo);
 		return "DB/join";
 	}
 	
 	@PostMapping
-	public String joinStart(UserVO vo, Errors error) {
+	public String joinStart(@Valid UserVO vo, Errors error) {
+		if(error.hasErrors()) {
+			System.out.println("회원가입에 오류가 있다아");
+			return "DB/join";
+		}
 		try {
 			joinService.doJoin(vo);
 		}catch(JoinFailException e) {

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 
@@ -36,31 +38,29 @@
 			<!-- 점보트론 -->
 			<div class="jumbotron" style="padding-top: 20px;">
 				<!-- 로그인 정보를 숨기면서 전송post -->
-				<form method="post" action="join.do">
+				
+				<form:form action="join.do" modelAttribute="userVO">
 
 					<h3 style="text-align: center;">회원가입</h3>
 
 					<div class="form-group">
-
-						<input type="text" class="form-control" placeholder="아이디"
-							name="id" maxlength="20">
+						<form:input path="id" class="form-control" placeholder="아이디" maxlength="20"/>
+						<form:errors path="id"/>
 					</div>
 
 					<div class="form-group">
-
-						<input type="password" class="form-control" placeholder="비밀번호"
-							name="pw" maxlength="20">
+						<form:password path="pw" class="form-control" placeholder="비밀번호" maxlength="20"/>
+						<form:errors path="pw"/>
+						
 					</div>
 
 					<div class="form-group">
-
-						<input type="text" class="form-control" placeholder="이름"
-							name="name" maxlength="20">
+						<form:input path="name" class="form-control" placeholder="이름"/>
+						<form:errors path="name"/>
 					</div>
 					<div class="form-group">
-
-						<input type="text" class="form-control" placeholder="전화번호"
-							name="phoneNumber" maxlength="20">
+						<form:input path="phoneNumber" class="form-control" placeholder="전화번호"/>
+						<form:errors path="phoneNumber"/>
 					</div>
 
 					<div class="form-group" style="text-align: center;">
@@ -75,7 +75,7 @@
 					</div>
 					<input type="submit" class="btn btn-primary form-control"
 						value="회원가입">
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>
