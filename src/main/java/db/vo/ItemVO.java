@@ -7,6 +7,24 @@ public class ItemVO {
 	private String address;
 	private String sellerID;
 	private Date itemAddDate;
+	private String sellerName;
+	private int price;
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	public int getItemNumber() {
 		return itemNumber;

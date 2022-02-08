@@ -34,6 +34,8 @@ public class SpringDAO implements DAOInterface{
 	private final String INSERTBUYER = "insert into buyer values(?, ?, ?, ?)";
 	private final String INSERTSELLER = "insert into seller values(?, ?, ?, ?)";
 	
+	private final String VIEW_TRADING = "select * from detailItem_trading order by itemNumber";
+	
 	
 	@Autowired
 	public SpringDAO(DataSource dataSource) {
@@ -86,6 +88,11 @@ public class SpringDAO implements DAOInterface{
 			return jdbcTemplate.update(INSERTSELLER, args);
 		}
 		return -1;
+	}
+	
+	@Override
+	public List<ItemVO> viewTrading(){
+		return null;
 	}
 
 	@Override

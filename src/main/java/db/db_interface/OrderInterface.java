@@ -1,9 +1,13 @@
 package db.db_interface;
 
+import java.util.List;
+
 import db.vo.ItemVO;
 
 public interface OrderInterface {
-	void addOrder(ItemVO vo) throws Exception;
+	public void addOrder(ItemVO vo) throws Exception;
 
-	void deleteOrder(int vo) throws Exception;
+	public void deleteOrder(int vo) throws Exception;
+
+	public List<ItemVO> viewTrading();
 }

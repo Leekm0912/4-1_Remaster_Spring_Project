@@ -24,30 +24,6 @@
 </head>
 <body>
 	<%
-		Connection con = null;
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	/* 11g express edition은 orcl 대신 XE를 입력한다. */
-	String userid = "MYDB";
-	String pwd = "dongsu14";
-	String query = "";
-
-	String type = request.getParameter("type");
-	String id = (String) session.getAttribute("userID");
-
-	try { /* 드라이버를 찾는 과정 */
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		//System.out.println("드라이버 로드 성공");
-	} catch (ClassNotFoundException e) {
-		e.printStackTrace();
-	}
-
-	try { /* 데이터베이스를 연결하는 과정 */
-		//System.out.println("데이터베이스 연결 준비 ...");
-		con = DriverManager.getConnection(url, userid, pwd);
-		//System.out.println("데이터베이스 연결 성공");
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
 	if (type.equals("view")) {
 		query = "select * from 상세매물_전세 order by 매물등록번호"; /* SQL 문 */
 	} else if (type.equals("sell")) {
