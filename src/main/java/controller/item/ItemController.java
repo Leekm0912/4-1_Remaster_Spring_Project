@@ -17,7 +17,7 @@ public class ItemController {
 	
 	@GetMapping("view")
 	public String view() {
-		return "DB/ViewTable";
+		return "ItemView";
 	}
 	
 	@GetMapping("view/trading.view")
@@ -40,7 +40,7 @@ public class ItemController {
 		}catch(ItemSearchException e) {
 			e.printStackTrace();
 		}
-		return "ItemView";
+		return "ItemView_detail";
 	}
 
 }

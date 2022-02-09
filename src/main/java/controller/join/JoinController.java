@@ -27,28 +27,24 @@ public class JoinController {
 		System.out.println("회원가입 화면 출력");
 		// <form:form> 사용 위해서 커맨드 객체를 모델에 넣어줌.
 		UserVO vo = new UserVO();
-//		vo.setId("null");
-//		vo.setName("null");
-//		vo.setPw("null");
-//		vo.setPhoneNumber("null");
 		model.addAttribute("userVO", vo);
-		return "join";
+		return "JoinPage";
 	}
 	
 	@PostMapping
 	public String joinStart(@Valid UserVO vo, Errors error) {
 		if(error.hasErrors()) {
 			System.out.println("회원가입에 오류가 있다아");
-			return "join";
+			return "JoinPage";
 		}
 		try {
 			joinService.doJoin(vo);
 		}catch(JoinFailException e) {
 			System.out.println("회원가입 실패");
-			return "DB/join";
+			return "JoinPage";
 		}catch(DuplicateKeyException e) {
 			System.out.println("중복된 아이디");
-			return "DB/join";
+			return "JoinPage";
 		}
 		return "redirect:main";
 	}
