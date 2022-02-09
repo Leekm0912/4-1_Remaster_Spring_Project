@@ -3,30 +3,28 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<title>매매</title>
-	
-	<!-- Bootstrap core CSS -->
-	<link href='<c:url value="/vendor/bootstrap/css/bootstrap.min.css"/>'
-		rel="stylesheet">
-	<link href='<c:url value="/vendor/mycss.css" />' rel="stylesheet">
-	<style type="text/css">
-	</style>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>ItemView</title>
+
+<!-- Bootstrap core CSS -->
+<link href='<c:url value="/vendor/bootstrap/css/bootstrap.min.css"/>'
+	rel="stylesheet">
+<link href='<c:url value="/vendor/mycss.css" />' rel="stylesheet">
+<style type="text/css">
+</style>
 </head>
 <body>
 	<form>
 		<table class="type1">
 			<tr>
 				<%-- 얘네 다 리소스 분리 해야함 --%>
-				<th scope="cols">매물등록번호</th>
-				<th scope="cols">등록일자</th>
-				<th scope="cols">매도자명</th>
-				<th scope="cols">주소</th>
-				<th scope="cols">가격</th>
+				<c:forEach var="menu" items='${ menuList }'>
+					<th scope="cols">${ menu }</th>
+				</c:forEach>
 				<c:choose>
 					<c:when test="${ type eq 'sell' }">
 						<th scope='cols'>구매 버튼</th>
@@ -65,8 +63,7 @@
 						<c:otherwise>
 							<td style='text-align: center;'><span
 								onclick="btn('${item.address}', '${ item.itemNumber}번 매물')"
-								class='btn btn-primary'>지도 보기</span>
-							</td>
+								class='btn btn-primary'>지도 보기</span></td>
 						</c:otherwise>
 					</c:choose>
 				</tr>

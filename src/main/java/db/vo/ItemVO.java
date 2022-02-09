@@ -1,19 +1,47 @@
 package db.vo;
 
 import java.sql.Date;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class ItemVO {
-	private int itemNumber;
+	private Integer itemNumber = -1;
 	private String address;
 	private String sellerID;
 	private Date itemAddDate;
 	private String sellerName;
-	private int price;
-	private int contractMonth;
-	private int deposit;
-	private int monthlyRentPrice;
-	private int SQM;
-	private int pricePerSQM;
+	private Integer price = -1;
+	private Integer contractMonth = -1;
+	private Integer deposit = -1;
+	private Integer monthlyRentPrice = -1;
+	private Integer SQM = -1;
+	private Integer pricePerSQM = -1;
+	
+	public int numOfExistData() {
+		int num = -1; // getClass()는 제외시키기 위해 -1부터 시작.
+		Method[] methods = ItemVO.class.getMethods();
+		for(Method m : methods) {
+			if(m.getName().substring(0, 3).equals("get")) {
+				System.out.println(m.getName());
+				try {
+					Object o = m.invoke(this);
+					if(o != null) { // null이 아닌 객체중에서
+						if(o instanceof Integer) { // null이 아니고 Integer인데 -1이 아니라면 num 증가
+							if((Integer)o != -1) {
+								num++;
+							}
+						}else { // null이 아니고 숫자가 아니면 num 증가
+							num++;
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		System.out.println(num);
+		return num;
+	}
 
 	@Override
 	public String toString() {
