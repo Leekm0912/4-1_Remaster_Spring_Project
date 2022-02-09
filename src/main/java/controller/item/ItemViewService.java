@@ -3,6 +3,8 @@ package controller.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import db.vo.ItemVO;
 
 @Service
 public class ItemViewService {
+	private static Logger LOGGER = LogManager.getLogger();
+	
 	@Autowired
 	DAOInterface dao;
 	
@@ -33,7 +37,7 @@ public class ItemViewService {
 		}
 		item.stream()
 		.forEach(v->{
-			System.out.println(v);
+			LOGGER.debug(v);
 		});
 		return item;
 	}
@@ -45,7 +49,7 @@ public class ItemViewService {
 		}
 		item.stream()
 		.forEach(v->{
-			System.out.println(v);
+			LOGGER.debug(v);
 		});
 		return item;
 	}

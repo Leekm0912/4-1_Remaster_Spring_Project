@@ -2,6 +2,8 @@ package controller.login;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ import db.vo.UserVO;
 
 @Service
 public class LoginService {
+	private static Logger LOGGER = LogManager.getLogger();
+	
 	@Autowired
 	private DAOInterface dao;
 	
@@ -31,7 +35,7 @@ public class LoginService {
 		}
 		result.setPw(null); // 비밀번호 검증 후 지움.
 		result.setUserType(vo.getUserType());
-//		System.out.println("Service 확인 "+result.getName());
+		LOGGER.debug("Service 확인 "+result.getName());
 		return result;
 	}
 	

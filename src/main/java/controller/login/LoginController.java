@@ -35,13 +35,13 @@ public class LoginController {
 
 	@PostMapping
 	public String loginStart(HttpSession sess, @Valid LoginCommand vo, Errors error, Model model) {
-		System.out.println("로그인 시작");
+		LOGGER.debug("로그인 시작");
 		if (error.hasErrors()) {
-			System.out.println("로그인 검증 중 에러");
+			LOGGER.debug("로그인 검증 중 에러");
 			return "LoginPage";
 		}
-		System.out.println("파라미터 id : " + vo.getId());
-		System.out.println("파라미터 userType : " + vo.getUserType());
+		LOGGER.debug("파라미터 id : " + vo.getId());
+		LOGGER.debug("파라미터 userType : " + vo.getUserType());
 		
 		// userType이 카카오 로그인인지 일반 로그인인지 확인 후 VO에 알맞게 저장해줌. 
 		loginService.checkUserType(sess, vo);
@@ -54,7 +54,7 @@ public class LoginController {
 //			e.printStackTrace();
 			System.err.println("service error : " + e.getClass().getName());
 			sess.removeAttribute("userType");
-			System.out.println("로그인 에러 발생!!");
+			LOGGER.debug("로그인 에러 발생!!");
 			// 안넣어주면 에러.
 			model.addAttribute("loginCommand", vo);
 			// 이런 에러 메시지 다 리소스로 분리해야함

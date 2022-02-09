@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +24,8 @@ import db.vo.UserVO;
 
 //@Repository("daoSpring")
 public class SpringDAO implements DAOInterface{
+	private static Logger LOGGER = LogManager.getLogger();
+	
 	private JdbcTemplate jdbcTemplate;
 	
 	// SQL 명령어들
@@ -44,12 +48,12 @@ public class SpringDAO implements DAOInterface{
 	
 	@Autowired
 	public SpringDAO(DataSource dataSource) {
-		System.out.println("===> SpringDAO 생성");
+		LOGGER.debug("===> SpringDAO 생성");
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
 	public void insert() throws Exception {
-//		System.out.println("===> Spring으로 insertSample() 기능 처리");
+//		LOGGER.debug("===> Spring으로 insertSample() 기능 처리");
 //		Object[] args = {vo.getId(), vo.getTitle(), vo.getRegUser(), 
 //			vo.getContent()};
 //		spring.update(SAMPLE_INSERT, args);
@@ -57,19 +61,19 @@ public class SpringDAO implements DAOInterface{
 
 	
 	public void update() throws Exception {
-//		System.out.println("===> Spring으로 updateSample() 기능 처리");
+//		LOGGER.debug("===> Spring으로 updateSample() 기능 처리");
 //		Object[] args = {vo.getId(), vo.getTitle(), vo.getRegUser(), vo.getContent(), vo.getId()};
 //		spring.update(SAMPLE_UPDATE, args);
 	}
 	
 	public void delete() throws Exception {
-//		System.out.println("===> Spring으로 deleteSample() 기능 처리");
+//		LOGGER.debug("===> Spring으로 deleteSample() 기능 처리");
 //		spring.update(SAMPLE_DELETE, vo.getId());
 	}
 	
 	@Override
 	public UserVO selectUser(String id, String userType) throws DataAccessException {
-		System.out.println("===> Spring으로 selectBuyer() 기능 처리");
+		LOGGER.debug("===> Spring으로 selectBuyer() 기능 처리");
 		Object[] args = {id};
 		
 		UserVO temp = null;
@@ -80,7 +84,7 @@ public class SpringDAO implements DAOInterface{
 			temp = jdbcTemplate.queryForObject(SELECTSELLER, args, 
 					new UserRowMapper());
 		}
-		System.out.println("★★★★★★★★★★★★★넘어온 값 " + temp);
+		LOGGER.debug("★★★★★★★★★★★★★넘어온 값 " + temp);
 		return temp;
 	}
 	
@@ -97,7 +101,7 @@ public class SpringDAO implements DAOInterface{
 	
 	@Override
 	public List<ItemVO> viewTrading(){
-		System.out.println("===> Spring으로 viewTrading() 기능 처리");
+		LOGGER.debug("===> Spring으로 viewTrading() 기능 처리");
 		List<ItemVO> temp = new ArrayList<>();
 		temp = jdbcTemplate.query(VIEW_TRADING, new ItemRowMapper_detailItem_trading());
 		return temp;
@@ -105,7 +109,7 @@ public class SpringDAO implements DAOInterface{
 	
 	@Override
 	public List<ItemVO> viewCharter(){
-		System.out.println("===> Spring으로 viewCharter() 기능 처리");
+		LOGGER.debug("===> Spring으로 viewCharter() 기능 처리");
 		List<ItemVO> temp = new ArrayList<>();
 		temp = jdbcTemplate.query(VIEW_CHARTER, new ItemRowMapper_detailItem_charter());
 		return temp;
