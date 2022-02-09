@@ -42,10 +42,27 @@
 			<c:forEach var="item" items='${ data }'>
 				<tr>
 					<td style='text-align: center;'>${ item.itemNumber }</td>
-					<td>${ item.itemAddDate }</td>
+					<td style='text-align: center;'>${ item.itemAddDate }</td>
 					<td style='text-align: center;'>${item.sellerName}</td>
-					<td>${ item.address }</td>
-					<td>${ item.price }</td>
+					<td style='text-align: center;'>${ item.address }</td>
+					<c:if test="${ item.contractMonth ne -1 }">
+						<td>${ item.contractMonth }</td>
+					</c:if>
+					<c:if test="${ item.deposit ne -1 }">
+						<td>${ item.deposit }</td>
+					</c:if>
+					<c:if test="${ item.monthlyRentPrice ne -1 }">
+						<td>${ item.monthlyRentPrice }</td>
+					</c:if>
+					<c:if test="${ item.SQM ne -1 }">
+						<td>${ item.SQM }</td>
+					</c:if>
+					<c:if test="${ item.pricePerSQM ne -1 }">
+						<td>${ item.pricePerSQM }</td>
+					</c:if>
+					<c:if test="${ item.price ne -1 }">
+						<td>${ item.price }</td>
+					</c:if>
 					<c:choose>
 						<c:when test="${ type eq 'sell' }">
 							<td><input type='submit' value='구매신청'

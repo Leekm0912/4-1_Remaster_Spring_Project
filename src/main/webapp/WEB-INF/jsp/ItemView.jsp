@@ -35,7 +35,7 @@
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=baca3a5f6f931f8a69d6569bf6473bf5&libraries=services"></script>
 
-		<a href="./view/전세.jsp?type=view" target="main_frame"
+		<a href="view/charter.view" target="main_frame"
 			class="btn btn-primary">전세</a> 
 		<a href="./view/월세.jsp?type=view" target="main_frame" 
 			class="btn btn-primary">월세</a> 

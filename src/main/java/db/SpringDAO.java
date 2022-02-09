@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import db.db_interface.DAOInterface;
+import db.rowmapper.ItemRowMapper_detailItem_charter;
 import db.rowmapper.ItemRowMapper_detailItem_trading;
 import db.rowmapper.UserRowMapper;
 import db.vo.ItemVO;
@@ -38,6 +39,7 @@ public class SpringDAO implements DAOInterface{
 	private final String INSERTSELLER = "insert into seller values(?, ?, ?, ?)";
 	
 	private final String VIEW_TRADING = "select * from detailItem_trading order by itemNumber";
+	private final String VIEW_CHARTER = "select * from detailItem_charter order by itemNumber";
 	
 	
 	@Autowired
@@ -98,6 +100,14 @@ public class SpringDAO implements DAOInterface{
 		System.out.println("===> Spring으로 viewTrading() 기능 처리");
 		List<ItemVO> temp = new ArrayList<>();
 		temp = jdbcTemplate.query(VIEW_TRADING, new ItemRowMapper_detailItem_trading());
+		return temp;
+	}
+	
+	@Override
+	public List<ItemVO> viewCharter(){
+		System.out.println("===> Spring으로 viewCharter() 기능 처리");
+		List<ItemVO> temp = new ArrayList<>();
+		temp = jdbcTemplate.query(VIEW_CHARTER, new ItemRowMapper_detailItem_charter());
 		return temp;
 	}
 
