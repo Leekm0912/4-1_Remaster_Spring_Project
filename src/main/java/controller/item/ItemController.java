@@ -1,5 +1,7 @@
 package controller.item;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.params.HttpParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,11 @@ public class ItemController {
 	public String viewTrading(Model model) {
 		try {
 			model.addAttribute("data", tradingViewService.view());
+//			model.addAttribute("type", "sell");
 		}catch(ItemSearchException e) {
 			e.printStackTrace();
 		}
-		return "DB/view/전세";
+		return "DB/view/매매";
 	}
 
 }

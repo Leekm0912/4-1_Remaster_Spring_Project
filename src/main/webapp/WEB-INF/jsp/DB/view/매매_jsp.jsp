@@ -18,8 +18,8 @@
 <title>전세</title>
 
 <!-- Bootstrap core CSS -->
-<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../mycss.css" rel="stylesheet">
+<link href='<c:url value="/vendor/bootstrap/css/bootstrap.min.css"/>' rel="stylesheet">
+<link href='<c:url value="/vendor/mycss.css" />' rel="stylesheet">
 <style type="text/css">
 </style>
 </head>
@@ -27,9 +27,9 @@
 	<form action="to.jsp" method="post">
 		<table class="type1">
 			<%
-				String type = (String)request.getAttribute("type");
-				System.out.println(type);
-				out.print("<input type='hidden' name='type' value='" + type + "'>");
+			String type = (String)request.getAttribute("type");
+			System.out.println(type);
+			out.print("<input type='hidden' name='type' value='" + type + "'>");
 			%>
 			<tr>
 				<th scope="cols">매물등록번호</th>
@@ -37,7 +37,6 @@
 				<th scope="cols">매도자명</th>
 				<th scope="cols">주소</th>
 				<th scope="cols">가격</th>
-				<th scope="cols">계약월수</th>
 				<%
 				
 				if (type.equals("sell")) {
@@ -53,19 +52,31 @@
 			</tr>
 			<%
 			List<ItemVO> data = (List<ItemVO>)request.getAttribute("data");
-			DecimalFormat formatter = new DecimalFormat("###,###");
 
-			data.stream()
-			.forEach(item->{
+			for(ItemVO item : data){
 				out.print("<tr>");
 				out.print("<td style='text-align:center;'>" + item.getItemNumber() + "</td>");
 				out.print("<td>" + item.getItemAddDate() + "</td>");
 				out.print("<td style='text-align:center;'>" + item.getSellerName() + "</td>");
 				out.print("<td>" + item.getAddress() + "</td>");
 				out.print("<td>" + item.getPrice() + "원" + "</td>");
-				out.print("<td>" + item.getContractMonth() + "개월" + "</td>");
+				
+				if (type.equals("sell")) {
+					out.print("<td><input type='submit' value='구매신청' name='data" + item.getItemNumber() + "' class='btn btn-primary'></td>");
+					out.print("<td style='text-align:center;'><span onclick=\"btn('" + item.getAddress() + "', '" + item.getItemNumber()
+					+ "번 매물')\" class='btn btn-primary'>지도 보기</span></td>");
+
+				} else if (type.equals("update")) {
+					out.print("<td><input type='submit' value='삭제' name='remove_data" + item.getItemNumber()
+					+ "' class='btn btn-primary'></td>");
+				} else {
+					out.print("<td style='text-align:center;'><span onclick=\"btn('" + item.getAddress() + "', '" + item.getItemNumber()
+					+ "번 매물')\" class='btn btn-primary'>지도 보기</span></td>");
+
+				}
+				
 				out.print("</tr>");
-			});
+			};
 			%>
 		</table>
 	</form>
@@ -78,7 +89,7 @@
 
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="../vendor/jquery/jquery.slim.min.js"></script>
-	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="vendor/jquery/jquery.slim.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
