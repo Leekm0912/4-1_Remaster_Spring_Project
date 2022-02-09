@@ -10,4 +10,6 @@ public interface OrderInterface {
 	public void deleteOrder(int vo) throws Exception;
 
 	public List<ItemVO> viewTrading();
+
+	public List<ItemVO> viewCharter();
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class ItemController {
 	@Autowired
-	TradingViewService tradingViewService;
+	ItemViewService itemViewService;
 	
 	@GetMapping("view")
 	public String view() {
@@ -24,17 +24,26 @@ public class ItemController {
 	public String viewTrading(Model model) {
 		try {
 			// DB에서 결과 불러온걸 모델에 저장.
-			model.addAttribute("data", tradingViewService.view()); 
+			model.addAttribute("data", itemViewService.getTradingData()); 
 			// 보여줄 메뉴 생성
-			String menu = "매물등록번호,등록일자,매도자명,주소,가격"; // 나중에 리소스 분리.
-			List<String> menuList = new ArrayList<>();
-			while(menu.indexOf(",") != -1) {
-				int index = menu.indexOf(",");
-				String substr = menu.substring(0,index);
-				menuList.add(substr);
-				menu = menu.substring(index+1);
-			}
-			menuList.add(menu); // 마지막 남은 하나도 넣어줌.
+			String menu = "매물등록번호,등록일자,매도자명,주소,가격";
+			List<String> menuList = itemViewService.makeMenuList(menu); // 나중에 리소스 분리.
+			model.addAttribute("menuList", menuList);
+			model.addAttribute("type", "view");
+		}catch(ItemSearchException e) {
+			e.printStackTrace();
+		}
+		return "ItemView_detail";
+	}
+	
+	@GetMapping("view/charter.view")
+	public String viewCharter(Model model) {
+		try {
+			// DB에서 결과 불러온걸 모델에 저장.
+			model.addAttribute("data", itemViewService.getCharterData()); 
+			// 보여줄 메뉴 생성
+			String menu = "매물등록번호,등록일자,매도자명,주소,계약기간(월),가격"; // 나중에 리소스 분리.
+			List<String> menuList = itemViewService.makeMenuList(menu);
 			model.addAttribute("menuList", menuList);
 			model.addAttribute("type", "view");
 		}catch(ItemSearchException e) {

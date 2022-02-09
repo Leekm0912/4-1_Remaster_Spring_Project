@@ -1,11 +1,11 @@
 package controller.login;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,12 +19,14 @@ import db.vo.UserVO;
 @Controller
 @RequestMapping("/login.do")
 public class LoginController {
+	private static Logger LOGGER = LogManager.getLogger();
+	
 	@Autowired
 	private LoginService loginService;
 
 	@GetMapping
 	public String viewLoginPage(Model model) {
-		System.out.println("로그인 화면 출력");
+		LOGGER.debug("로그인 화면 출력");
 		// <form:form> 사용 위해서 커맨드 객체를 모델에 넣어줌.
 		LoginCommand vo = new LoginCommand();
 		model.addAttribute("loginCommand", vo);
