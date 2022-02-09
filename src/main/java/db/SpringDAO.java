@@ -1,5 +1,6 @@
 package db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import db.db_interface.DAOInterface;
+import db.rowmapper.ItemRowMapper_detailItem_trading;
+import db.rowmapper.UserRowMapper;
 import db.vo.ItemVO;
 import db.vo.UserVO;
 
@@ -92,7 +95,10 @@ public class SpringDAO implements DAOInterface{
 	
 	@Override
 	public List<ItemVO> viewTrading(){
-		return null;
+		System.out.println("===> Spring으로 viewTrading() 기능 처리");
+		List<ItemVO> temp = new ArrayList<>();
+		temp = jdbcTemplate.query(VIEW_TRADING, new ItemRowMapper_detailItem_trading());
+		return temp;
 	}
 
 	@Override

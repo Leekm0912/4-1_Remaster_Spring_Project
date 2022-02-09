@@ -1,4 +1,4 @@
-package db;
+package db.rowmapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,15 +8,16 @@ import org.springframework.jdbc.core.RowMapper;
 import db.vo.ItemVO;
 import db.vo.UserVO;
 
-public class ItemRowMapper_detailView implements RowMapper<ItemVO> 
+public class ItemRowMapper_detailItem_trading implements RowMapper<ItemVO> 
 {
 	@Override
 	public ItemVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ItemVO sample = new ItemVO();
-		sample.setAddress(rs.getNString("address"));
-		sample.setItemAddDate(rs.getDate("itemAddDate"));
 		sample.setItemNumber((rs.getInt("itemNumber")));
+		sample.setSellerName(rs.getString("sellerName"));
+		sample.setAddress(rs.getString("address"));
 		sample.setPrice((rs.getInt("price")));
+		sample.setItemAddDate(rs.getDate("itemAddDate"));
 		return sample;
 	}
 }

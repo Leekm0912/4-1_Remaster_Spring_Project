@@ -9,6 +9,56 @@ public class ItemVO {
 	private Date itemAddDate;
 	private String sellerName;
 	private int price;
+	private int contractMonth;
+	private int deposit;
+	private int monthlyRentPrice;
+	private int SQM;
+	private int pricePerSQM;
+
+	@Override
+	public String toString() {
+		return "itemNumber : " + itemNumber + "\taddress : " + address;
+	}
+
+	public int getContractMonth() {
+		return contractMonth;
+	}
+
+	public void setContractMonth(int contractMonth) {
+		this.contractMonth = contractMonth;
+	}
+
+	public int getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(int deposit) {
+		this.deposit = deposit;
+	}
+
+	public int getMonthlyRentPrice() {
+		return monthlyRentPrice;
+	}
+
+	public void setMonthlyRentPrice(int monthlyRentPrice) {
+		this.monthlyRentPrice = monthlyRentPrice;
+	}
+
+	public int getSQM() {
+		return SQM;
+	}
+
+	public void setSQM(int sQM) {
+		SQM = sQM;
+	}
+
+	public int getPricePerSQM() {
+		return pricePerSQM;
+	}
+
+	public void setPricePerSQM(int pricePerSQM) {
+		this.pricePerSQM = pricePerSQM;
+	}
 
 	public String getSellerName() {
 		return sellerName;
