@@ -1,5 +1,7 @@
 package controller.login;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
@@ -31,5 +33,16 @@ public class LoginService {
 		result.setUserType(vo.getUserType());
 //		System.out.println("Service 확인 "+result.getName());
 		return result;
+	}
+	
+	public void checkUserType(HttpSession sess, LoginCommand vo) {
+		String userType = vo.getUserType();
+		if (userType.equals("kakao매수자") || userType.equals("매수자")) {
+			sess.setAttribute("userType", "매수자");
+			vo.setUserType("buyer");
+		} else if (userType.equals("kakao매도자") || userType.equals("매도자")) {
+			sess.setAttribute("userType", "매도자");
+			vo.setUserType("seller");
+		}
 	}
 }

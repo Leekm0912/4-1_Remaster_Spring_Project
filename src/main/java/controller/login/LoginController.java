@@ -39,18 +39,14 @@ public class LoginController {
 			return "LoginPage";
 		}
 		System.out.println("파라미터 id : " + vo.getId());
-		System.out.println("파라미터 Pw : " + vo.getPw());
 		System.out.println("파라미터 userType : " + vo.getUserType());
+		
+		// userType이 카카오 로그인인지 일반 로그인인지 확인 후 VO에 알맞게 저장해줌. 
+		loginService.checkUserType(sess, vo);
+		
 		UserVO userInfo = null;
-		String temp = vo.getUserType();
-		if (temp.equals("kakao매수자") || temp.equals("매수자")) {
-			sess.setAttribute("userType", "매수자");
-			vo.setUserType("buyer");
-		} else if (temp.equals("kakao매도자") || temp.equals("매도자")) {
-			sess.setAttribute("userType", "매도자");
-			vo.setUserType("seller");
-		}
 		try {
+			// 로그인 작업 수행. 일치하는 아이디 없거나, 비번 틀리면 예외 발생.
 			userInfo = loginService.login(vo);
 		} catch (LoginException e) {
 //			e.printStackTrace();
@@ -60,10 +56,10 @@ public class LoginController {
 			// 안넣어주면 에러.
 			model.addAttribute("loginCommand", vo);
 			// 이런 에러 메시지 다 리소스로 분리해야함
-			model.addAttribute("hasError", "["+ e.getClass().getName() +"]\n존재하지 않는 아이디 이거나, 잘못된 비밀번호 입니다.");
+			model.addAttribute("hasError", 
+					"["+ e.getClass().getName() +"]\n존재하지 않는 아이디 이거나, 잘못된 비밀번호 입니다.");
 			return "LoginPage";
 		}
-//		System.out.println("컨트롤러 확인 " + userInfo);
 		sess.setAttribute("userInfo", userInfo);
 		model.addAttribute("userName", userInfo.getName());
 		return "redirect:main";
