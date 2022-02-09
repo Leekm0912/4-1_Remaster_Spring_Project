@@ -22,7 +22,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 		<div class="container">
-			<jsp:include page="./DB/layout/top.jsp" flush="false" />
+			<jsp:include page="./layout/top.jsp" flush="false" />
 		</div>
 	</nav>
 

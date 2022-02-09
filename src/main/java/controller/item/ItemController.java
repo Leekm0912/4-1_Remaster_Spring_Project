@@ -40,7 +40,7 @@ public class ItemController {
 		}catch(ItemSearchException e) {
 			e.printStackTrace();
 		}
-		return "DB/view/매매";
+		return "ItemView";
 	}
 
 }

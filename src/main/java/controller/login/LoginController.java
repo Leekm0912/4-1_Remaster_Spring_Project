@@ -28,7 +28,7 @@ public class LoginController {
 		// <form:form> 사용 위해서 커맨드 객체를 모델에 넣어줌.
 		LoginCommand vo = new LoginCommand();
 		model.addAttribute("loginCommand", vo);
-		return "DB/login";
+		return "login";
 	}
 
 	@PostMapping
@@ -36,7 +36,7 @@ public class LoginController {
 		System.out.println("로그인 시작");
 		if (error.hasErrors()) {
 			System.out.println("로그인 검증 중 에러");
-			return "DB/login";
+			return "login";
 		}
 		System.out.println("파라미터 id : " + vo.getId());
 		System.out.println("파라미터 Pw : " + vo.getPw());
@@ -61,7 +61,7 @@ public class LoginController {
 			model.addAttribute("loginCommand", vo);
 			// 이런 에러 메시지 다 리소스로 분리해야함
 			model.addAttribute("hasError", "["+ e.getClass().getName() +"]\n존재하지 않는 아이디 이거나, 잘못된 비밀번호 입니다.");
-			return "DB/login";
+			return "login";
 		}
 //		System.out.println("컨트롤러 확인 " + userInfo);
 		sess.setAttribute("userInfo", userInfo);

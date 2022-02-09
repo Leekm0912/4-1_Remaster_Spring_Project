@@ -32,14 +32,14 @@ public class JoinController {
 //		vo.setPw("null");
 //		vo.setPhoneNumber("null");
 		model.addAttribute("userVO", vo);
-		return "DB/join";
+		return "join";
 	}
 	
 	@PostMapping
 	public String joinStart(@Valid UserVO vo, Errors error) {
 		if(error.hasErrors()) {
 			System.out.println("회원가입에 오류가 있다아");
-			return "DB/join";
+			return "join";
 		}
 		try {
 			joinService.doJoin(vo);

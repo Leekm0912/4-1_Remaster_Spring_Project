@@ -41,7 +41,7 @@
 			class="btn btn-primary">월세</a> 
 		<a href="./view/토지.jsp?type=view" target="main_frame"
 			class="btn btn-primary">토지</a> 
-		<a href="./view/매매.jsp?type=view" target="main_frame" 
+		<a href="view/trading.view" target="main_frame" 
 			class="btn btn-primary">매매</a>
 
 	</div>

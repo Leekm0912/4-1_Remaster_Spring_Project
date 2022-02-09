@@ -28,7 +28,7 @@
 		</init-param>
 		<init-param>
 		    <param-name>spring.profiles.active</param-name>
-		    <param-value>school</param-value>
+		    <param-value>home</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
