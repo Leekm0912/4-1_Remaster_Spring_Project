@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import db.vo.ItemVO;
 import db.vo.UserVO;
 
-public class ItemRowMapper_detailItem_charter implements RowMapper<ItemVO> 
+public class ItemRowMapper_detailItem_land implements RowMapper<ItemVO> 
 {
 	@Override
 	public ItemVO mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -18,8 +18,8 @@ public class ItemRowMapper_detailItem_charter implements RowMapper<ItemVO>
 		sample.setAddress(rs.getString("address"));
 		sample.setItemAddDate(rs.getDate("itemAddDate"));
 		
-		sample.setPrice((rs.getInt("price")));
-		sample.setContractMonth(rs.getInt("contractMonth"));
+		sample.setSQM(rs.getInt("SQM"));
+		sample.setPricePerSQM(rs.getInt("pricePerSQM"));
 		return sample;
 	}
 }

@@ -12,4 +12,8 @@ public interface OrderInterface {
 	public List<ItemVO> viewTrading();
 
 	public List<ItemVO> viewCharter();
+
+	public List<ItemVO> viewMonthlyRent();
+
+	public List<ItemVO> viewLand();
 }

@@ -53,4 +53,28 @@ public class ItemViewService {
 		});
 		return item;
 	}
+	
+	public List<ItemVO> getMonthlyRent() throws ItemSearchException{
+		List<ItemVO> item = dao.viewMonthlyRent();
+		if(item == null) {
+			throw new ItemSearchException();
+		}
+		item.stream()
+		.forEach(v->{
+			LOGGER.debug(v);
+		});
+		return item;
+	}
+	
+	public List<ItemVO> getLand() throws ItemSearchException{
+		List<ItemVO> item = dao.viewLand();
+		if(item == null) {
+			throw new ItemSearchException();
+		}
+		item.stream()
+		.forEach(v->{
+			LOGGER.debug(v);
+		});
+		return item;
+	}
 }

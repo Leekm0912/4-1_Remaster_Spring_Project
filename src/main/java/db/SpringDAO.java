@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import db.db_interface.DAOInterface;
 import db.rowmapper.ItemRowMapper_detailItem_charter;
+import db.rowmapper.ItemRowMapper_detailItem_land;
+import db.rowmapper.ItemRowMapper_detailItem_monthlyRent;
 import db.rowmapper.ItemRowMapper_detailItem_trading;
 import db.rowmapper.UserRowMapper;
 import db.vo.ItemVO;
@@ -44,6 +46,8 @@ public class SpringDAO implements DAOInterface{
 	
 	private final String VIEW_TRADING = "select * from detailItem_trading order by itemNumber";
 	private final String VIEW_CHARTER = "select * from detailItem_charter order by itemNumber";
+	private final String VIEW_MONTHLYRENT = "select * from detailItem_monthlyRent order by itemNumber";
+	private final String VIEW_LAND = "select * from detailItem_land order by itemNumber";
 	
 	
 	@Autowired
@@ -112,6 +116,22 @@ public class SpringDAO implements DAOInterface{
 		LOGGER.debug("===> Spring으로 viewCharter() 기능 처리");
 		List<ItemVO> temp = new ArrayList<>();
 		temp = jdbcTemplate.query(VIEW_CHARTER, new ItemRowMapper_detailItem_charter());
+		return temp;
+	}
+	
+	@Override
+	public List<ItemVO> viewMonthlyRent(){
+		LOGGER.debug("===> Spring으로 viewMonthlyRent() 기능 처리");
+		List<ItemVO> temp = new ArrayList<>();
+		temp = jdbcTemplate.query(VIEW_MONTHLYRENT, new ItemRowMapper_detailItem_monthlyRent());
+		return temp;
+	}
+	
+	@Override
+	public List<ItemVO> viewLand(){
+		LOGGER.debug("===> Spring으로 viewLand() 기능 처리");
+		List<ItemVO> temp = new ArrayList<>();
+		temp = jdbcTemplate.query(VIEW_LAND, new ItemRowMapper_detailItem_land());
 		return temp;
 	}
 

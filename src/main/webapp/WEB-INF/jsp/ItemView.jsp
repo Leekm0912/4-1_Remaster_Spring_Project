@@ -37,9 +37,9 @@
 
 		<a href="view/charter.view" target="main_frame"
 			class="btn btn-primary">전세</a> 
-		<a href="./view/월세.jsp?type=view" target="main_frame" 
+		<a href="view/monthlyRent.view" target="main_frame" 
 			class="btn btn-primary">월세</a> 
-		<a href="./view/토지.jsp?type=view" target="main_frame"
+		<a href="view/land.view" target="main_frame"
 			class="btn btn-primary">토지</a> 
 		<a href="view/trading.view" target="main_frame" 
 			class="btn btn-primary">매매</a>
