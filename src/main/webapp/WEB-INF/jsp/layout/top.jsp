@@ -52,8 +52,8 @@
 			<li class="nav-item active"><a class="nav-link" href="main"><spring:message code="main.top.home"/><span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="view"><spring:message code="main.top.itemView"/></a></li>
-			<li class="nav-item"><a class="nav-link" href="InsertTable.jsp"><spring:message code="main.top.insertItem"/></a></li>
-			<li class="nav-item"><a class="nav-link" href="Order.jsp"><spring:message code="main.top.orderItem"/></a></li>
+			<li class="nav-item"><a class="nav-link" href="insertItem"><spring:message code="main.top.insertItem"/></a></li>
+			<li class="nav-item"><a class="nav-link" href="insertOrder"><spring:message code="main.top.orderItem"/></a></li>
 		</ul>
 	</div>
 
