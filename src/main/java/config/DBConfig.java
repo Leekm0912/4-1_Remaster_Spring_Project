@@ -80,6 +80,38 @@ public class DBConfig {
 			return ds;
 		}
 	}
+	
+	@Configuration
+	@Profile("docker")
+	public static class DockerDataSourceConfig {
+		@Value("${db.driver}")
+		private String driver;
+		@Value("${db.docker.url}")
+		private String url;
+		@Value("${db.url.args}")
+		private String url_args;
+		@Value("${db.docker.schema}")
+		private String schema;
+		@Value("${db.docker.id}")
+		private String id;
+		@Value("${db.docker.pw}")
+		private String pw;
+		
+		@Bean(destroyMethod = "close")
+		public DataSource dataSource() {
+			DataSource ds = new DataSource();
+			ds.setDriverClassName(driver);
+			ds.setUrl(url+schema+url_args);
+			ds.setUsername(id);
+			ds.setPassword(pw);		
+			ds.setInitialSize(2);
+			ds.setMaxActive(10);
+			ds.setTestWhileIdle(true);
+			ds.setMinEvictableIdleTimeMillis(60000 * 3);
+			ds.setTimeBetweenEvictionRunsMillis(10 * 1000);
+			return ds;
+		}
+	}
 
 	@Bean
 	public PlatformTransactionManager transactionManager() {
