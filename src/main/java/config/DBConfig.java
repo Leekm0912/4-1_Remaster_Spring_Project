@@ -1,5 +1,10 @@
 package config;
 
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,10 +15,12 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 import db.SpringDAO;
 
 @Configuration
 @EnableTransactionManagement
+@MapperScan(basePackages = {"db.mybatis", "db.mapper"})
 public class DBConfig {
 	@Autowired
 	DataSource ds;
@@ -123,5 +130,17 @@ public class DBConfig {
 	@Bean
 	public SpringDAO springDAO() {
 		return new SpringDAO(ds);
+	}
+	
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(ds);
+		return sqlSessionFactoryBean.getObject();
+	}
+	
+	@Bean
+	public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+		return new SqlSessionTemplate(sqlSessionFactory());
 	}
 }
