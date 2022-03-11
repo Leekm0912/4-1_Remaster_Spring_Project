@@ -1,5 +1,6 @@
 package config;
 
+import java.io.IOException;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -8,23 +9,22 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 
 import db.SpringDAO;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = {"db.mybatis", "db.mapper"})
+@MapperScan(basePackages = {"db.mybatis"})
 public class DBConfig {
 	@Autowired
 	DataSource ds;
-	
+
 	@Configuration
 	@Profile("home")
 	public static class HomeDataSourceConfig {
@@ -40,14 +40,14 @@ public class DBConfig {
 		private String id;
 		@Value("${db.home.pw}")
 		private String pw;
-		
+
 		@Bean(destroyMethod = "close")
 		public DataSource dataSource() {
 			DataSource ds = new DataSource();
 			ds.setDriverClassName(driver);
-			ds.setUrl(url+schema+url_args);
+			ds.setUrl(url + schema + url_args);
 			ds.setUsername(id);
-			ds.setPassword(pw);		
+			ds.setPassword(pw);
 			ds.setInitialSize(2);
 			ds.setMaxActive(10);
 			ds.setTestWhileIdle(true);
@@ -56,7 +56,7 @@ public class DBConfig {
 			return ds;
 		}
 	}
-	
+
 	@Configuration
 	@Profile("school")
 	public class DBSchoolConfig {
@@ -72,12 +72,12 @@ public class DBConfig {
 		private String id;
 //		@Value("${db.school.pw}")
 //		private String pw;
-		
+
 		@Bean(destroyMethod = "close")
 		public DataSource dataSource() {
 			DataSource ds = new DataSource();
 			ds.setDriverClassName(driver);
-			ds.setUrl(url+schema+url_args);
+			ds.setUrl(url + schema + url_args);
 			ds.setUsername(id);
 			ds.setInitialSize(2);
 			ds.setMaxActive(10);
@@ -87,7 +87,7 @@ public class DBConfig {
 			return ds;
 		}
 	}
-	
+
 	@Configuration
 	@Profile("docker")
 	public static class DockerDataSourceConfig {
@@ -103,14 +103,14 @@ public class DBConfig {
 		private String id;
 		@Value("${db.docker.pw}")
 		private String pw;
-		
+
 		@Bean(destroyMethod = "close")
 		public DataSource dataSource() {
 			DataSource ds = new DataSource();
 			ds.setDriverClassName(driver);
-			ds.setUrl(url+schema+url_args);
+			ds.setUrl(url + schema + url_args);
 			ds.setUsername(id);
-			ds.setPassword(pw);		
+			ds.setPassword(pw);
 			ds.setInitialSize(2);
 			ds.setMaxActive(10);
 			ds.setTestWhileIdle(true);
@@ -120,27 +120,39 @@ public class DBConfig {
 		}
 	}
 
+	// Spring JDBC 설정
+//	@Bean
+//	public PlatformTransactionManager transactionManager() {
+//		DataSourceTransactionManager tm = new DataSourceTransactionManager();
+//		tm.setDataSource(ds);
+//		return tm;
+//	}
+
+	// 마이바티스 설정
 	@Bean
-	public PlatformTransactionManager transactionManager() {
-		DataSourceTransactionManager tm = new DataSourceTransactionManager();
-		tm.setDataSource(ds);
-		return tm;
+	public DataSourceTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(ds);
 	}
-	
+
+	@Autowired
+	ApplicationContext applicationContext;
+
+	@Bean
+	public SqlSessionFactoryBean sqlSessionFactory() throws IOException {
+		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+		factoryBean.setDataSource(ds);
+		factoryBean.setConfigLocation(applicationContext.getResource("classpath:/db/mybatis/mybatis-config.xml"));
+		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/db/mybatis/mappers/*.xml"));
+		return factoryBean;
+	}
+
+	@Bean
+	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
+		return new SqlSessionTemplate(sqlSessionFactory);
+	}
+
 	@Bean
 	public SpringDAO springDAO() {
 		return new SpringDAO(ds);
-	}
-	
-	@Bean
-	public SqlSessionFactory sqlSessionFactory() throws Exception {
-		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(ds);
-		return sqlSessionFactoryBean.getObject();
-	}
-	
-	@Bean
-	public SqlSessionTemplate sqlSessionTemplate() throws Exception {
-		return new SqlSessionTemplate(sqlSessionFactory());
 	}
 }
