@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- namespace는 mapper interface의 경로와 동일하게 해줘야 함. -->
+<!-- 
+private final String SELECTBUYER = "select * from buyer where id=?";
+private final String SELECTSELLER = "select * from seller where id=?";
+private final String INSERTBUYER = "insert into buyer values(?, ?, ?, ?)";
+private final String INSERTSELLER = "insert into seller values(?, ?, ?, ?)";
+
+private final String VIEW_TRADING = "select * from detailItem_trading order by itemNumber";
+private final String VIEW_CHARTER = "select * from detailItem_charter order by itemNumber";
+private final String VIEW_MONTHLYRENT = "select * from detailItem_monthlyRent order by itemNumber";
+private final String VIEW_LAND = "select * from detailItem_land order by itemNumber";
+ -->
+
+<mapper namespace="db.mybatis.MybatisDAO">
+
+	<select id="selectBuyer" resultType="db.vo.UserVO" parameterType="string">
+		select * from buyer where id=#{id}
+	</select>
+
+</mapper>

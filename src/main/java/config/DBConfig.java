@@ -150,6 +150,7 @@ public class DBConfig {
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
+	// 마이바티스 설정
 
 	@Bean
 	public SpringDAO springDAO() {
