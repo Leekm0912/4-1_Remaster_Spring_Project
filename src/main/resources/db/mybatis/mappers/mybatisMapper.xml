@@ -18,8 +18,22 @@ private final String VIEW_LAND = "select * from detailItem_land order by itemNum
 
 <mapper namespace="db.mybatis.MybatisDAO">
 
-	<select id="selectBuyer" resultType="db.vo.UserVO" parameterType="string">
-		select * from buyer where id=#{id}
+	<select id="selectUser" resultType="db.vo.UserVO" parameterType="hashmap">
+	    <if test="userType.equals('buyer')">
+	        select * from buyer where id=#{id}
+	    </if>
+	    <if test="userType.equals('seller')">
+	        select * from seller where id=#{id}
+	    </if>
 	</select>
+	
+	<insert id="insertUser" parameterType="db.vo.UserVO" >
+	    <if test="userType.equals('buyer')">
+	        insert into buyer values(#{id}, #{pw}, #{name}, #{phoneNumber})
+	    </if>
+	    <if test="userType.equals('seller')">
+	        insert into seller values(#{id}, #{pw}, #{name}, #{phoneNumber})
+	    </if>
+	</insert>
 
 </mapper>

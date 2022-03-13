@@ -1,9 +1,13 @@
 package db;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +15,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import db.mybatis.MybatisDAO;
 import db.mybatis.TimeMapper;
+import db.vo.UserVO;
 
 // @ContextConfiguration : 불러올 설정파일.
 // java 설정파일의 경우는 .class 형식을 불러오고
@@ -33,12 +39,35 @@ public class mybatisTest {
 	// Autowired 할 bean은 static이면 안됨.
 	@Autowired
 	private TimeMapper timeMapper;
+	
+	@Autowired
+	private MybatisDAO mybatisDAO;
 
-	@Test
+	@Ignore
 	public void testTimeMapper() throws Exception {
 		assertNotNull(timeMapper);
 		LOGGER.debug("@@@@@timeMapper : " + timeMapper.getClass().getName());
 		LOGGER.debug("@@@@@timeMapper getTime() : " + timeMapper.getTime());
 		LOGGER.debug("@@@@@timeMapper getTime3() : " + timeMapper.getTime3());
+	}
+	
+	@Test
+	public void testSelectBuyer() throws Exception {
+		assertNotNull(mybatisDAO);
+		Map<String, String> m = new HashMap<>();
+		m.put("id", "admin");
+		m.put("userType", "buyer");
+		UserVO vo = mybatisDAO.selectUser(m);
+		LOGGER.debug("@@@@@mybatisDAO selectUser(\"1\", \"buyer\") : " + vo);
+		assertEquals("관리자(매수)", vo.getName());
+		assertEquals("admin", vo.getId());
+		
+		m = new HashMap<>();
+		m.put("id", "admin");
+		m.put("userType", "seller");
+		vo = mybatisDAO.selectUser(m);
+		LOGGER.debug("@@@@@mybatisDAO selectUser(\"1\", \"seller\") : " + vo);
+		assertEquals("관리자(매도)", vo.getName());
+		assertEquals("admin", vo.getId());
 	}
 }

@@ -1,5 +1,8 @@
 package controller.login;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +27,10 @@ public class LoginService {
 	public UserVO login(LoginCommand vo) {
 		UserVO result = null;
 		try {
-			result = dao.selectUser(vo.getId(), vo.getUserType());
+			Map<String, String> data = new HashMap<>();
+			data.put("id", vo.getId());
+			data.put("userType", vo.getUserType());
+			result = dao.selectUser(data);
 		}catch(DataAccessException e) {
 //			e.printStackTrace();
 			System.err.println("DataAccessException");

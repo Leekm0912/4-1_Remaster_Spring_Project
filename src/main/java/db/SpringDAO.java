@@ -2,6 +2,7 @@ package db;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -75,21 +76,23 @@ public class SpringDAO implements DAOInterface{
 //		spring.update(SAMPLE_DELETE, vo.getId());
 	}
 	
+	// Mybatis로 옮김. 기능 구현 여기서 다시 안함.
 	@Override
-	public UserVO selectUser(String id, String userType) throws DataAccessException {
-		LOGGER.debug("===> Spring으로 selectBuyer() 기능 처리");
-		Object[] args = {id};
-		
-		UserVO temp = null;
-		if(userType.equals("buyer")) {
-			temp = jdbcTemplate.queryForObject(SELECTBUYER, args, 
-				new UserRowMapper());
-		}else if(userType.equals("seller")) {
-			temp = jdbcTemplate.queryForObject(SELECTSELLER, args, 
-					new UserRowMapper());
-		}
-		LOGGER.debug("★★★★★★★★★★★★★넘어온 값 " + temp);
-		return temp;
+	public UserVO selectUser(Map<String, String> data) throws DataAccessException {
+//		LOGGER.debug("===> Spring으로 selectBuyer() 기능 처리");
+//		Object[] args = {id};
+//		
+//		UserVO temp = null;
+//		if(userType.equals("buyer")) {
+//			temp = jdbcTemplate.queryForObject(SELECTBUYER, args, 
+//				new UserRowMapper());
+//		}else if(userType.equals("seller")) {
+//			temp = jdbcTemplate.queryForObject(SELECTSELLER, args, 
+//					new UserRowMapper());
+//		}
+//		LOGGER.debug("★★★★★★★★★★★★★넘어온 값 " + temp);
+//		return temp;
+		return null;
 	}
 	
 	@Override

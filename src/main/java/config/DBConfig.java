@@ -152,8 +152,8 @@ public class DBConfig {
 	}
 	// 마이바티스 설정
 
-	@Bean
-	public SpringDAO springDAO() {
-		return new SpringDAO(ds);
-	}
+//	@Bean
+//	public SpringDAO springDAO() {
+//		return new SpringDAO(ds);
+//	}
 }
