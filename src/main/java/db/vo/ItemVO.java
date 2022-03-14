@@ -16,6 +16,7 @@ public class ItemVO {
 	private Integer monthlyRentPrice = -1;
 	private Integer SQM = -1;
 	private Integer pricePerSQM = -1;
+	private String selectItem;
 	
 	public int numOfExistData() {
 		int num = -1; // getClass()는 제외시키기 위해 -1부터 시작.
@@ -46,6 +47,14 @@ public class ItemVO {
 	@Override
 	public String toString() {
 		return "itemNumber : " + itemNumber + "\taddress : " + address;
+	}
+	
+	public String getSelectItem() {
+		return selectItem;
+	}
+
+	public void setSelectItem(String selectItem) {
+		this.selectItem = selectItem;
 	}
 
 	public int getContractMonth() {

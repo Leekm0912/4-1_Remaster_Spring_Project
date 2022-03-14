@@ -53,7 +53,7 @@ public class mybatisTest {
 		LOGGER.debug("@@@@@timeMapper getTime3() : " + timeMapper.getTime3());
 	}
 	
-	@Test
+	@Ignore
 	public void testSelectBuyer() throws Exception {
 		assertNotNull(mybatisDAO);
 		Map<String, String> m = new HashMap<>();
@@ -73,10 +73,12 @@ public class mybatisTest {
 		assertEquals("admin", vo.getId());
 	}
 	
-	@Test
+	@Ignore
 	public void testViewItemAsMap() throws Exception {
 		assertNotNull(mybatisDAO);
-		List<Map<String, ItemVO>> vo = mybatisDAO.viewItemAsMap("test");
+		Map<String, String> m = new HashMap<>();
+		m.put("selectItem", "land");
+		List<Map<String, ItemVO>> vo = mybatisDAO.viewItemAsMap(m);
 		LOGGER.debug("@@@@@mybatisDAO viewItemAsMap(\"test) : " + vo);
 
 		vo.stream()
@@ -89,11 +91,23 @@ public class mybatisTest {
 		});
 	}
 	
-	@Test
+	@Ignore
 	public void testViewItemAsList() throws Exception {
 		assertNotNull(mybatisDAO);
-		List<ItemVO> vo = mybatisDAO.viewItemAsList("test");
-		LOGGER.debug("@@@@@mybatisDAO viewItemAsList(\"test) : " + vo);
+		Map<String, String> m = new HashMap<>();
+		m.put("selectItem", "land");
+		List<ItemVO> vo = mybatisDAO.viewItemAsList(m);
+		LOGGER.debug("@@@@@mybatisDAO viewItemAsList(\"land\") : " + vo);
+		vo.stream()
+		.forEach((v)->{
+			LOGGER.debug("[결과] v : "+ v);
+			LOGGER.debug("★★★★★★★★★★★★★★★★★★★★★★");
+		});
+		
+		m = new HashMap<>();
+		m.put("selectItem", "charter");
+		vo = mybatisDAO.viewItemAsList(m);
+		LOGGER.debug("@@@@@mybatisDAO viewItemAsList(\"charter\") : " + vo);
 
 		vo.stream()
 		.forEach((v)->{
@@ -101,4 +115,23 @@ public class mybatisTest {
 			LOGGER.debug("★★★★★★★★★★★★★★★★★★★★★★");
 		});
 	}
+	
+	@Test
+	public void testInsertItem(){
+		ItemVO vo = new ItemVO();
+		vo.setItemNumber(mybatisDAO.getRecentItemNumber() + 1);
+		vo.setAddress("테스트");
+		vo.setSellerID("admin");
+		vo.setPrice(10000);
+		vo.setSelectItem("trading");
+		int result = mybatisDAO.addItem(vo);
+		assertNotEquals(result, 0);
+	}
+	
+	@Test
+	public void testDeleteItem(){
+		int result = mybatisDAO.deleteItem(mybatisDAO.getRecentItemNumber());
+		assertNotEquals(result, 0);
+	}
+	
 }

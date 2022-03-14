@@ -2,6 +2,7 @@ package controller.item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,44 +31,8 @@ public class ItemViewService {
 		return menuList;
 	}
 	
-	public List<ItemVO> getTradingData() throws ItemSearchException{
-		List<ItemVO> item = dao.viewTrading();
-		if(item == null) {
-			throw new ItemSearchException();
-		}
-		item.stream()
-		.forEach(v->{
-			LOGGER.debug(v);
-		});
-		return item;
-	}
-	
-	public List<ItemVO> getCharterData() throws ItemSearchException{
-		List<ItemVO> item = dao.viewCharter();
-		if(item == null) {
-			throw new ItemSearchException();
-		}
-		item.stream()
-		.forEach(v->{
-			LOGGER.debug(v);
-		});
-		return item;
-	}
-	
-	public List<ItemVO> getMonthlyRent() throws ItemSearchException{
-		List<ItemVO> item = dao.viewMonthlyRent();
-		if(item == null) {
-			throw new ItemSearchException();
-		}
-		item.stream()
-		.forEach(v->{
-			LOGGER.debug(v);
-		});
-		return item;
-	}
-	
-	public List<ItemVO> getLand() throws ItemSearchException{
-		List<ItemVO> item = dao.viewLand();
+	public List<ItemVO> getItemData(Map<String, String> selectItem) throws ItemSearchException{
+		List<ItemVO> item = dao.viewItemAsList(selectItem);
 		if(item == null) {
 			throw new ItemSearchException();
 		}

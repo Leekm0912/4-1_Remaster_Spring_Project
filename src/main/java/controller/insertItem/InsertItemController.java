@@ -6,22 +6,31 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import db.vo.ItemVO;
+
 @Controller
 @RequestMapping("insertItem")
 public class InsertItemController {
+	@Autowired
+	InsertItemService service;
+	
 	@GetMapping
 	public String view() {
 		return "InsertItem";
 	}
 
 	@PostMapping("start")
-	public String insertStart(Model model) {
+	public String insertStart(Model model, ItemVO vo) {
+		
+		service.insertItem(vo);
+		
 		String message = "등록이 완료되었습니다!";
 		model.addAttribute("message", message);
 		return "complete";
