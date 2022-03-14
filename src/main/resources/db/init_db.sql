@@ -91,27 +91,33 @@ create table land(
 create view detailOrder as
 select orderNumber, buyer.name as buyerName, seller.name as sellerName, item.itemNumber as itemNumber
 from orderList, item, buyer, seller
-where orderList.orderNumber = item.itemNumber;
+where orderList.orderNumber = item.itemNumber
+and orderList.buyerID = buyer.id
+and orderList.sellerID = seller.id;
 
 create view detailItem_trading as
 select item.itemNumber as itemNumber, seller.name as sellerName, address, price, itemAddDate
 from item, seller, trading
-where item.itemNumber = trading.itemNumber;
+where item.itemNumber = trading.itemNumber
+and item.sellerID = seller.id;
 
 create view detailItem_monthlyRent as
 select item.itemNumber as itemNumber, seller.name as sellerName, address, contractMonth, deposit, monthlyRentPrice, itemAddDate
 from item, seller, monthlyRent
-where item.itemNumber = monthlyRent.itemNumber;
+where item.itemNumber = monthlyRent.itemNumber
+and item.sellerID = seller.id;
 
 create view detailItem_charter as
 select item.itemNumber as itemNumber, seller.name as sellerName, address, contractMonth, price, itemAddDate
 from item, seller, charter
-where item.itemNumber = charter.itemNumber;
+where item.itemNumber = charter.itemNumber
+and item.sellerID = seller.id;
 
 create view detailItem_land as
 select item.itemNumber as itemNumber, seller.name as sellerName, address, SQM, pricePerSQM, itemAddDate
 from item, seller, land
-where item.itemNumber = land.itemNumber;
+where item.itemNumber = land.itemNumber
+and item.sellerID = seller.id;
 
 # view test data
 insert into item values(1, '매매테스트', 'admin', CURRENT_TIMESTAMP);
