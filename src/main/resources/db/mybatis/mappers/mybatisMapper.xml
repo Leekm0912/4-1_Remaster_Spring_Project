@@ -77,16 +77,16 @@
 	<insert id="addItem" parameterType="db.vo.ItemVO">
 	    insert into item values(#{itemNumber}, #{address}, #{sellerID}, CURRENT_TIMESTAMP);
 	    
-	    <if test="selectItem == 'trading'">
+	    <if test="selectItem == 'trading' || selectItem == '매매'">
 	        insert into trading values(#{itemNumber}, #{sellerID}, #{price});
 	    </if>
-	    <if test="selectItem == 'charter'">
+	    <if test="selectItem == 'charter' || selectItem == '전세'">
 	        insert into charter values(#{itemNumber}, #{sellerID}, #{contractMonth}, #{price});
 	    </if>
-	    <if test="selectItem == 'monthlyRent'">
+	    <if test="selectItem == 'monthlyRent' || selectItem == '월세'">
 	        insert into monthlyRent values(#{itemNumber}, #{sellerID}, #{contractMonth}, #{deposit}, #{monthlyRentPrice});
 	    </if>
-	    <if test="selectItem == 'land'">
+	    <if test="selectItem == 'land' || selectItem == '토지'">
 	        insert into land values(#{itemNumber}, #{sellerID}, #{SQM}, #{pricePerSQM});
 	    </if>
 	</insert>

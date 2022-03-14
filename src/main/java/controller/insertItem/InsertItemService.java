@@ -16,7 +16,7 @@ public class InsertItemService {
 	
 	public boolean insertItem(ItemVO vo) {
 		int recentItemNumber = dao.getRecentItemNumber();
-		vo.setItemNumber(recentItemNumber);
+		vo.setItemNumber(recentItemNumber + 1);
 		try {
 			int result = dao.addItem(vo);
 			if(result < 1) {

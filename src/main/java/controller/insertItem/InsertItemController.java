@@ -5,7 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import db.vo.ItemVO;
+import db.vo.UserVO;
 
 @Controller
 @RequestMapping("insertItem")
 public class InsertItemController {
+	private static Logger LOGGER = LogManager.getLogger();
 	@Autowired
 	InsertItemService service;
 	
@@ -27,11 +32,19 @@ public class InsertItemController {
 	}
 
 	@PostMapping("start")
-	public String insertStart(Model model, ItemVO vo) {
+	public String insertStart(Model model, HttpSession sess, ItemVO vo) {
+		UserVO userInfo = (UserVO)sess.getAttribute("userInfo");
+		vo.setSellerID(userInfo.getId());
+		LOGGER.debug(vo + " selectItem : " + vo.getSelectItem());
+		boolean result = service.insertItem(vo);
 		
-		service.insertItem(vo);
+		String message;
+		if(result) {
+			 message = "등록이 완료되었습니다!";
+		}else {
+			message = "등록실패";
+		}
 		
-		String message = "등록이 완료되었습니다!";
 		model.addAttribute("message", message);
 		return "complete";
 	}

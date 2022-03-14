@@ -20,6 +20,7 @@
 	<div style="text-align:center;">
 	<h1>${ title }</h1>
 	<form action="start" method="post">
+		<input type="hidden" name="selectItem" value="${title}"/>
 		<c:forEach var="d" items='${ data }'>
 			<h5>${ d.value }</h5>
 			<input type="text" name="${ d.key }" size="50" class="form-control" id="exampleTextarea" style="width: 60%; margin:auto"> <br>
