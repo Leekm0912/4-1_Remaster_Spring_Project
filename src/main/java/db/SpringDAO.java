@@ -27,7 +27,10 @@ import db.vo.UserVO;
 
 // 현재는 사용안함. 기능 몇개만 다시 구현하면 mybatis에서 SpringJDBC로 교체 가능
 //@Repository("daoSpring")
-public class SpringDAO implements DAOInterface{
+public class SpringDAO 
+//implements DAOInterface
+{
+	/*
 	private static Logger LOGGER = LogManager.getLogger();
 	
 	private JdbcTemplate jdbcTemplate;
@@ -140,26 +143,49 @@ public class SpringDAO implements DAOInterface{
 //	}
 
 	@Override
-	public void addOrder(ItemVO vo) throws Exception {
+	public int addOrder(ItemVO vo){
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteOrder(int vo) throws Exception {
+	public int deleteOrder(int vo){
+		return vo;
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<Map<String, ItemVO>> viewItemAsMap(String selectItem) {
+	public List<Map<String, ItemVO>> viewItemAsMap(Map<String, String> selectItem) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ItemVO> viewItemAsList(String selectItem) {
+	public List<ItemVO> viewItemAsList(Map<String, String> selectItem) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int addItem(ItemVO vo) {
+		return 0;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int deleteItem(int itemNumber) {
+		return itemNumber;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getRecentItemNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	*/
 }
