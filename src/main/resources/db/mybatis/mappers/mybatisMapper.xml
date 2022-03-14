@@ -18,7 +18,7 @@ private final String VIEW_LAND = "select * from detailItem_land order by itemNum
 
 <mapper namespace="db.mybatis.MybatisDAO">
 
-	<select id="selectUser" resultType="db.vo.UserVO" parameterType="hashmap">
+	<select id="selectUser" parameterType="hashmap" resultType="db.vo.UserVO" >
 	    <if test="userType.equals('buyer')">
 	        select * from buyer where id=#{id}
 	    </if>
@@ -35,5 +35,14 @@ private final String VIEW_LAND = "select * from detailItem_land order by itemNum
 	        insert into seller values(#{id}, #{pw}, #{name}, #{phoneNumber})
 	    </if>
 	</insert>
+	
+	<select id="viewItemAsMap" parameterType="string" resultType="map" >
+	    select * from detailItem_trading order by itemNumber
+	</select>
+	
+	<!-- List로 불러오려면 view의 속성과 프로퍼티 이름을 as~~ 하면서 맞춰야함 -->
+	<select id="viewItemAsList" parameterType="string" resultType="db.vo.ItemVO" >
+	    select * from detailItem_trading order by itemNumber
+	</select>
 
 </mapper>

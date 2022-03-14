@@ -152,6 +152,7 @@ public class DBConfig {
 	}
 	// 마이바티스 설정
 
+	// SpringJDBC대신 mybatis 사용할꺼라서 주석처리함.
 //	@Bean
 //	public SpringDAO springDAO() {
 //		return new SpringDAO(ds);

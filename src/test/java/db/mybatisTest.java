@@ -3,6 +3,7 @@ package db;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import db.mybatis.MybatisDAO;
 import db.mybatis.TimeMapper;
+import db.vo.ItemVO;
 import db.vo.UserVO;
 
 // @ContextConfiguration : 불러올 설정파일.
@@ -69,5 +71,34 @@ public class mybatisTest {
 		LOGGER.debug("@@@@@mybatisDAO selectUser(\"1\", \"seller\") : " + vo);
 		assertEquals("관리자(매도)", vo.getName());
 		assertEquals("admin", vo.getId());
+	}
+	
+	@Test
+	public void testViewItemAsMap() throws Exception {
+		assertNotNull(mybatisDAO);
+		List<Map<String, ItemVO>> vo = mybatisDAO.viewItemAsMap("test");
+		LOGGER.debug("@@@@@mybatisDAO viewItemAsMap(\"test) : " + vo);
+
+		vo.stream()
+		.forEach((map)->{
+			map.keySet().stream()
+			.forEach(key->{
+				LOGGER.debug("[결과] key : "+ key + "\tvalue : " + map.get(key));
+			});
+			LOGGER.debug("=======================================================");
+		});
+	}
+	
+	@Test
+	public void testViewItemAsList() throws Exception {
+		assertNotNull(mybatisDAO);
+		List<ItemVO> vo = mybatisDAO.viewItemAsList("test");
+		LOGGER.debug("@@@@@mybatisDAO viewItemAsList(\"test) : " + vo);
+
+		vo.stream()
+		.forEach((v)->{
+			LOGGER.debug("[결과] v : "+ v);
+			LOGGER.debug("★★★★★★★★★★★★★★★★★★★★★★");
+		});
 	}
 }

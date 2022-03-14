@@ -25,6 +25,7 @@ import db.vo.ItemVO;
 import db.vo.UserVO;
 
 
+// 현재는 사용안함. 기능 몇개만 다시 구현하면 mybatis에서 SpringJDBC로 교체 가능
 //@Repository("daoSpring")
 public class SpringDAO implements DAOInterface{
 	private static Logger LOGGER = LogManager.getLogger();
@@ -106,37 +107,37 @@ public class SpringDAO implements DAOInterface{
 		return -1;
 	}
 	
-	@Override
-	public List<ItemVO> viewTrading(){
-		LOGGER.debug("===> Spring으로 viewTrading() 기능 처리");
-		List<ItemVO> temp = new ArrayList<>();
-		temp = jdbcTemplate.query(VIEW_TRADING, new ItemRowMapper_detailItem_trading());
-		return temp;
-	}
-	
-	@Override
-	public List<ItemVO> viewCharter(){
-		LOGGER.debug("===> Spring으로 viewCharter() 기능 처리");
-		List<ItemVO> temp = new ArrayList<>();
-		temp = jdbcTemplate.query(VIEW_CHARTER, new ItemRowMapper_detailItem_charter());
-		return temp;
-	}
-	
-	@Override
-	public List<ItemVO> viewMonthlyRent(){
-		LOGGER.debug("===> Spring으로 viewMonthlyRent() 기능 처리");
-		List<ItemVO> temp = new ArrayList<>();
-		temp = jdbcTemplate.query(VIEW_MONTHLYRENT, new ItemRowMapper_detailItem_monthlyRent());
-		return temp;
-	}
-	
-	@Override
-	public List<ItemVO> viewLand(){
-		LOGGER.debug("===> Spring으로 viewLand() 기능 처리");
-		List<ItemVO> temp = new ArrayList<>();
-		temp = jdbcTemplate.query(VIEW_LAND, new ItemRowMapper_detailItem_land());
-		return temp;
-	}
+//	@Override
+//	public List<ItemVO> viewTrading(){
+//		LOGGER.debug("===> Spring으로 viewTrading() 기능 처리");
+//		List<ItemVO> temp = new ArrayList<>();
+//		temp = jdbcTemplate.query(VIEW_TRADING, new ItemRowMapper_detailItem_trading());
+//		return temp;
+//	}
+//	
+//	@Override
+//	public List<ItemVO> viewCharter(){
+//		LOGGER.debug("===> Spring으로 viewCharter() 기능 처리");
+//		List<ItemVO> temp = new ArrayList<>();
+//		temp = jdbcTemplate.query(VIEW_CHARTER, new ItemRowMapper_detailItem_charter());
+//		return temp;
+//	}
+//	
+//	@Override
+//	public List<ItemVO> viewMonthlyRent(){
+//		LOGGER.debug("===> Spring으로 viewMonthlyRent() 기능 처리");
+//		List<ItemVO> temp = new ArrayList<>();
+//		temp = jdbcTemplate.query(VIEW_MONTHLYRENT, new ItemRowMapper_detailItem_monthlyRent());
+//		return temp;
+//	}
+//	
+//	@Override
+//	public List<ItemVO> viewLand(){
+//		LOGGER.debug("===> Spring으로 viewLand() 기능 처리");
+//		List<ItemVO> temp = new ArrayList<>();
+//		temp = jdbcTemplate.query(VIEW_LAND, new ItemRowMapper_detailItem_land());
+//		return temp;
+//	}
 
 	@Override
 	public void addOrder(ItemVO vo) throws Exception {
@@ -148,5 +149,17 @@ public class SpringDAO implements DAOInterface{
 	public void deleteOrder(int vo) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Map<String, ItemVO>> viewItemAsMap(String selectItem) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ItemVO> viewItemAsList(String selectItem) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
