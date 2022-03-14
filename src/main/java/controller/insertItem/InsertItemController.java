@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -32,8 +33,19 @@ public class InsertItemController {
 	}
 
 	@PostMapping("start")
-	public String insertStart(Model model, HttpSession sess, ItemVO vo) {
+	public String insertStart(Model model, HttpSession sess, HttpServletRequest request, ItemVO vo) {
 		UserVO userInfo = (UserVO)sess.getAttribute("userInfo");
+		try {
+			if(userInfo.getUserType().equals("buyer")) {
+				throw new DoNotAccessBuyer();
+			}
+		}catch(DoNotAccessBuyer e) {
+			// 이전페이지 보여줌
+			LOGGER.error(e.getClass().getName());
+			String message = "매수자는 매도할 수 없습니다.";
+			model.addAttribute("message", message);
+			return "complete";
+		}
 		vo.setSellerID(userInfo.getId());
 		LOGGER.debug(vo + " selectItem : " + vo.getSelectItem());
 		boolean result = service.insertItem(vo);
