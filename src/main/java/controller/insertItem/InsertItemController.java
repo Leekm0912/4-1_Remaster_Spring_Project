@@ -35,6 +35,13 @@ public class InsertItemController {
 	@PostMapping("start")
 	public String insertStart(Model model, HttpSession sess, HttpServletRequest request, ItemVO vo) {
 		UserVO userInfo = (UserVO)sess.getAttribute("userInfo");
+		if(userInfo == null) { // AOP로 처리해보기.
+			LOGGER.error("로그인 안함.");
+			String message = "로그인이 필요합니다.";
+			model.addAttribute("message", message);
+			return "complete";
+//			throw new NeedLoginException();
+		}
 		try {
 			if(userInfo.getUserType().equals("buyer")) {
 				throw new DoNotAccessBuyer();
