@@ -106,9 +106,11 @@
 							console.log(res);
 							var userName = res.properties.nickname;
 							var userID = res.id; //유저의 카카오톡 고유 id
+							var phoneNumber = res.kakao_account.email // 로그인 이메일
 
 							console.log(userName);
 							console.log(userID);
+							console.log(phoneNumber);
 							// POST 방식으로 응답 전송
 							var form = document.createElement('form');
 							form.setAttribute("method", "post");
@@ -116,7 +118,8 @@
 							var params = {
 									"userType":"kakao"+type,
 									"id":userName,
-									"pw":userID
+									"pw":userID,
+									"phoneNumber":phoneNumber
 							};
 							for(var key in params){
 								var hiddenField = document.createElement('input');

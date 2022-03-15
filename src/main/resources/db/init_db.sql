@@ -19,7 +19,7 @@ create table buyer(
 	ID VARCHAR(50) PRIMARY KEY not null,
 	PW VARCHAR(50) not null,
 	name VARCHAR(50) not null,
-	phoneNumber VARCHAR(20) not null
+	phoneNumber VARCHAR(50) not null
 );
 insert into buyer values("admin", '1212', '관리자(매수)', '안알랴줌');
 
@@ -27,7 +27,7 @@ create table seller(
 	ID VARCHAR(50) PRIMARY KEY not null,
 	PW VARCHAR(50) not null,
 	name VARCHAR(50) not null,
-	phoneNumber VARCHAR(20) not null
+	phoneNumber VARCHAR(50) not null
 );
 insert into seller values("admin", '1212', '관리자(매도)', '안알랴줌');
 

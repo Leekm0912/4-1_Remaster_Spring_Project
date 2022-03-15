@@ -42,6 +42,7 @@ public class LoginController {
 		}
 		LOGGER.debug("파라미터 id : " + vo.getId());
 		LOGGER.debug("파라미터 userType : " + vo.getUserType());
+		LOGGER.debug("파라미터 pw : " + vo.getPw());
 		
 		// userType이 카카오 로그인인지 일반 로그인인지 확인 후 VO에 알맞게 저장해줌. 
 		loginService.checkUserType(sess, vo);

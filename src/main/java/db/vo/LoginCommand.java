@@ -8,6 +8,24 @@ public class LoginCommand {
 	@NotBlank
 	private String pw;
 	private String userType;
+	private String kakaoUser = "";
+	private String phoneNumber;
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getKakaoUser() {
+		return kakaoUser;
+	}
+
+	public void setKakaoUser(String kakaoUser) {
+		this.kakaoUser = kakaoUser;
+	}
 
 	public String getId() {
 		return id;
